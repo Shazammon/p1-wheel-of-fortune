@@ -12,52 +12,64 @@
 </head>
 <body>
     <!-- Wheel of fortune header, instructions button -->
-    <div>
-        <h1>Wheel of Fortune - Ammon's version</h1>
+    <div id="top-screen">
+        <img src="./WOF_Logo.webp" id="logo">
     </div>
 
     <!-- Aside - money amount, wheel, and spin button -->
-    <aside>
-        <!-- container -->
-        <div>
-            <!--money amount -->
-            <div>$XXX</div>
+    <div id="center-screen">
+        <aside>
+            <!-- container -->
+            <div id="container-one">
+                <!--money amount -->
+                <div id="spin-value" class="aside-left">$XXX</div>
 
-            <!-- Wheel -->
-            <img src="./wheel-pic.png">
+                <!-- Wheel -->
+                <img src="./wheel-pic.png" id="wheel">
 
-            <!-- spin button -->
-            <button>SPIN</button>
-        </div>
-    </aside>
+                <!-- spin button -->
+                <button id="spin-button" class="aside-left">SPIN</button>
+            </div>
+        </aside>
 
-    <!-- puzzle board -->
-    <main>
-        <!-- divs for each individual letter go here but created in the DOM-->
-        <div></div>
-    </main>
+        <!-- puzzle board -->
+        <main>
+            <!-- divs for each individual letter go here but created in the DOM-->
+            <div id="puzzle-board"></div>
+        </main>
 
-    <!-- Aside for player scores -->
-    <aside>
-        <h2>Player 1</h2>
-        <div>$XXXX</div>
-        <h2>Player 2</h2>
-        <div>$XXXX</div>
-    </aside>
+        <!-- Aside for player scores -->
+        <aside>
+            <div id="container-two">
+                <div id="player-one-cash" class="aside-right">
+                    <h2>Player 1</h2>
+                    <div class="player-cash">$XXXX</div>
+                </div>
+                <div id="player-two-cash" class="aside-right">
+                    <h2>Player 2</h2>
+                    <div class="player-cash">$XXXX</div>
+                </div>
+            </div>    
+        </aside>
+    </div>
 
     <!-- Message board -->
-    <div></div>
+    <div id="message-board">
+        <p></p>
+    </div>
 
     <!-- input box, guess button, solve puzzle button, instructions -->
-    <div>
+    <div id="bottom-screen">
         <!-- input box -->
-        <input>
+        <div>
+            <input id="input">
 
         <!-- Enter button -->
-        <button>Guess</button>
-
+            <button id="guess-button">Guess</button>
+        </div>
         <!-- Solve button -->
-        <button>I'd like to solve the puzzle!</button>
+        <button id="solve-button">I'd like to solve the puzzle!</button>
+        
     </div>
 
 

@@ -1,0 +1,108 @@
+#top-screen {
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+}
+
+#logo {
+    
+}
+
+#center-screen {
+    display: flex;
+    height: 65vh;
+    /* flex-wrap: wrap; */
+    align-items: center;
+
+}
+
+#container-one {
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+    width: 25vw;
+    background-color: blue;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    /* align-items: center; */
+}
+
+#wheel {
+    
+}
+
+.aside-left {
+    font-size: 3vh;
+    align-self: center;
+}
+
+#spin-value {
+    text-align: center;
+    max-width: 75%;
+    min-width: 75%;
+    background-color: hotpink;
+    border-radius: 2px;
+}
+
+#spin-button {
+    max-width: 50%;
+    min-width: 50%;
+    align-self: center;
+    border-radius: 12px;
+
+}
+
+#puzzle-board {
+    height: 65vh;
+    width: 60vw;
+    background-color: purple;
+}
+
+#container-two {
+    height: 65vh;
+    width: 15vw;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.aside-right {
+    
+}
+
+#player-one-cash {
+    background-color: aqua;
+}
+#player-two-cash {
+    background-color: orange;
+}
+
+.player-cash {
+    font-size: 3vw;
+}
+
+#message-board {
+    height: 12vh;
+    background-color: red;
+}
+
+#bottom-screen {
+    display: flex;
+    justify-content: space-evenly;
+    height: 5vh;
+}
+
+#input {
+    height: 100%;
+    width: 50vw;
+}
+
+#guess-button {
+    height: 100%;
+}
+
+#solve-button {
+    height: 100%;
+}
