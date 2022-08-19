@@ -49,4 +49,6 @@ Unlimited number of words and phrases pulled in somehow
 
 ## Potential Roadblocks
 Successfully creating layout of screen in a way that looks nice and is functional
+Auto-spacing out the letter tiles of the word puzzle - do I use flexbox for this?
+
 
