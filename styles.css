@@ -8,11 +8,14 @@
     
 }
 
+/* consider making max-min widths heights for all sections and then putting them ALL in a flexbox */
+
 #center-screen {
     display: flex;
     height: 65vh;
     /* flex-wrap: wrap; */
     align-items: center;
+    margin: 0 auto;
 
 }
 
@@ -54,8 +57,9 @@
 
 #puzzle-board {
     height: 65vh;
-    width: 60vw;
+    width: 59vw;
     background-color: purple;
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
 }
 
 #container-two {
@@ -69,14 +73,17 @@
 }
 
 .aside-right {
-    
+    border-radius: 30px;
+    border: .7vh gray solid;
 }
 
 #player-one-cash {
     background-color: aqua;
+    /* opacity: .5  */
 }
 #player-two-cash {
     background-color: orange;
+    
 }
 
 .player-cash {
@@ -85,24 +92,51 @@
 
 #message-board {
     height: 12vh;
+    /* width: 98vw; */
     background-color: red;
+    border-radius: 20px;
+    margin: 1vh auto;
+    border: 1vh black solid;
+    box-shadow: 5px 10px;
 }
 
 #bottom-screen {
     display: flex;
     justify-content: space-evenly;
     height: 5vh;
+    flex-wrap: wrap;
+    font-size: 2vh;
 }
 
 #input {
     height: 100%;
     width: 50vw;
+    font-size: 2vh;
 }
 
 #guess-button {
     height: 100%;
+    font-size: 2vh;
 }
 
 #solve-button {
     height: 100%;
+    font-size: 2vh;
 }
+
+#tile-container {
+    display: flex;
+    justify-content: row;
+
+}
+
+.tile {
+    background-color: whitesmoke;
+    width: 7%;
+    height: 0;
+    padding-top: 7%;
+    border: .1vh solid black;
+    border-radius: 15%;
+    
+}
+
