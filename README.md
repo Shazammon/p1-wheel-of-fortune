@@ -29,7 +29,7 @@ Render a game screen with:
 - Input box to guess a letter or the puzzle
 - Puzzle board screen with white tiles representing letters of the word
 Render the winning screen and prize
-Create array of possible word options with corresponding word categories that are randomly selected at the start of a new game.
+Create array of possible word/phrase options with corresponding categories that are randomly selected at the start of a new game. Once a word is used, it goes to the back of the queue and is not selected again until all words/phrases have been used.
 Render a dollar value on the screen after a player presses the "Spin" button - the value is chosen from an array of possible dollar values
 Create logic to display prompts on message board at the correct time, e.g. "Player 1, it's your turn. Spin the wheel!", "Player 1, guess
 Create logic to check if a letter is in the given word/phrase, appropriate points added to to respective player if letter is in word
@@ -43,12 +43,17 @@ The "start new game" button resets the game and randomly generates a new word pu
 
 ## Stretch Goals
 Render the wheel so that wheel actually spins and lands on the correct point value when the "SPIN" button is pressed
+Running total of players' points and # of wins for continual game play
 "Lose a turn" tile on wheel of fortune and logic to skip player's turn
+Create "Toss up" part of game where white tiles representing a word/phrase is shown and letters slowly are revealed. A player can hit their key to try to solve the puzzle. This determines who goes first. 
 Allow up to 4 players and at the start of the game, ask how many players will be playing 
+Add sound and a sound on/off button
 Unlimited number of words and phrases pulled in somehow
+
 
 ## Potential Roadblocks
 Successfully creating layout of screen in a way that looks nice and is functional
-Auto-spacing out the letter tiles of the word puzzle - do I use flexbox for this?
+Auto-creating objects representing each letter tile and then auto-spacing out the letter tiles of the word puzzle - do I use flexbox for this?
+
 
 
