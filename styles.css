@@ -60,6 +60,11 @@
     width: 59vw;
     background-color: purple;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    
+    
 }
 
 #container-two {
@@ -136,7 +141,7 @@
 
 .word-container-class {
     display: flex;
-    justify-content: row;
+    justify-content: center;
     align-items: center;
     
     
