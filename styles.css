@@ -125,18 +125,55 @@
 }
 
 #tile-container {
+    /* display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; */
+    /* height: 100%;
+    width: 100%; */
+    
+
+}
+
+.word-container-class {
     display: flex;
     justify-content: row;
+    align-items: center;
+    
+    
+}
 
+.square {
+    position: relative;
+    width: 8%;
+    /* not sure i need this below */
+    overflow: hidden;
+}
+
+.square:after {
+    content: "";
+    display: block;
+    padding-top: 100%;
+    text-align: center;
 }
 
 .tile {
     background-color: whitesmoke;
-    width: 7%;
+    position: absolute;
+    text-align: center;
+    padding-top: 25%;
+    padding-bottom: 25%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* width: 100%;
+    height: 100%; */
+    /* width:100%;
     height: 0;
-    padding-top: 7%;
+    padding-top:100%; */
     border: .1vh solid black;
     border-radius: 15%;
+    font-size: 2vw;
     
 }
 
