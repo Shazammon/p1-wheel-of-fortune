@@ -25,25 +25,53 @@ let twoFreePlay = false
 const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'Bankrupt', 650, 'Free Play', 700, 'Lose a Turn', 800, 500, 450, 500, 300, 'Bankrupt']
 const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
 const puzzleOps = {
-    Food: 'BACON',
-    Clothing: 'JUMPSUITS ARE COOL',
-    Family: 'GRANDMA AND GRANDPA',
+    word1: {
+        category: 'Thing',
+        word: 'CREAM OF CHICKEN SOUP'
+    },
+    word2: {
+       category: 'Clothing', 
+       word: 'JUMPSUITS'
+    },
+    word3: {
+        category: 'Family',
+        word: 'GRANDMA AND GRANDPA'
+    },
+    word4: {
+        category: 'Thing',
+        word: 'THE BILL OF RIGHTS',
+    },
+    word5: {
+        category: 'Phrase',
+        word: 'GONE BUT NOT FORGOTTEN'
+    },
+    word6: {
+        category: 'Thing',
+        word: 'THE NATIONAL ANTHEM',
+    },
+    word7: {
+        category: 'Occupation',
+        word: 'SKI INSTRUCTOR',
+    },
+    word8: {
+        category: 'Thing',
+        word: 'WHITE ELEPHANT GIFT EXCHANGE',
+    },
+    word9: {
+        category:'Person',
+        word: 'SKI INSTRUCTOR',
+    },
+    
 }
 
+let currentPuzzleObject = ""
 let currentPuzzleCategory = ""
 let currentPuzzle =""
 let currentPuzzleArray = []
 let firstWord = ""
 let secondWord = ""
 let thirdWord = ""
-let fourthWord = "" 
-
-function getRandomPuzzle(puzzleOps) {
-    let puzzleTest = Object.keys(puzzleOps);
-    currentPuzzleCategory = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
-    currentPuzzle = puzzleOps[currentPuzzleCategory]
-}
-// getRandomPuzzle(puzzleOps)
+let fourthWord = ""
 
 
 
@@ -133,11 +161,26 @@ spinButt.addEventListener('click', function(e) {
     }
 })
 
+// Select random puzzle
+function getRandomPuzzle(puzzleOps) {
+    let puzzleTest = Object.keys(puzzleOps);
+    currentPuzzleCategory = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
+    currentPuzzle = puzzleOps[currentPuzzleCategory]
+}
+
+
 // Function to select a new Puzzle
-function newPuzzle() {
-    let puzzIndexNum = randomPuzzleVal()
-    let currentPuzzle = puzzleOptions[puzzIndexNum]
+function generateNewPuzzle(puzzleOps) {
+    let puzzleTest = Object.keys(puzzleOps);
+    currentPuzzleObject = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
+    currentPuzzleCategory = puzzleOps[currentPuzzleObject[category]]
+    currentPuzzle = puzzleOps[currentPuzzleObject[word]]
+    console.log(currentPuzzleCategory)
     console.log(currentPuzzle)
+
+   
+    // let puzzIndexNum = randomPuzzleVal()
+    // let currentPuzzle = puzzleOptions[puzzIndexNum]
     currentPuzzleArray = currentPuzzle.split(" ")
     console.log(currentPuzzleArray.length)
     // Create word buckets
@@ -158,7 +201,7 @@ function newPuzzle() {
     console.log(thirdWord)
 }
 
-newPuzzle()
+generateNewPuzzle(puzzleOps)
 
 // function to create puzzle divs
 function generatePuzzleLetters(first, second, third, fourth) {
