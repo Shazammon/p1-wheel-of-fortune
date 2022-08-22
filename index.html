@@ -30,7 +30,7 @@
                 <div id="spin-value" class="aside-left">$XXX</div>
 
                 <!-- Wheel -->
-                <img src="./wheel-pic.png" id="wheel">
+                <img src="./wheel-of-fortune-2.jpeg" id="wheel">
 
                 <!-- spin button -->
                 <button id="spin-button" class="aside-left">SPIN</button>
@@ -97,13 +97,13 @@
         <!-- Aside for player scores -->
         <aside>
             <div id="container-two">
-                <div id="player-one-cash" class="aside-right">
+                <div class="aside-right">
                     <h2>Player 1</h2>
-                    <div class="player-cash">$XXXX</div>
+                    <div class="player-cash" id="player-one-cash">$XXXX</div>
                 </div>
-                <div id="player-two-cash" class="aside-right">
+                <div class="aside-right">
                     <h2>Player 2</h2>
-                    <div class="player-cash">$XXXX</div>
+                    <div class="player-cash" id="player-two-cash">$XXXX</div>
                 </div>
             </div>    
         </aside>
@@ -125,7 +125,11 @@
         </div>
         <!-- Solve button -->
         <button id="solve-button">I'd like to solve the puzzle!</button>
-        <button id="instructions">Instructions</button>
+        <div id="controls-container">
+            <button id="instructions-button" class="game-controls">Instructions</button>
+            <button id="new-game-button" class="game-controls">Start New Game</button>
+            <button id="reset-button" class="game-controls">Reset Scores</button>
+        </div>
     </div>
 
 

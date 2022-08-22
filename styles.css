@@ -90,16 +90,17 @@ body {
     border-radius: 30px;
     /* border: .7vh gray solid; */
     width: 13vw;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #player-one-cash {
     /* background-color: aqua; */
     /* opacity: .5  */
-    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 #player-two-cash {
     /* background-color: orange; */
-    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     
 }
 
@@ -208,7 +209,6 @@ body {
     border: .1vh solid black;
     border-radius: 15%;
     font-size: 2vw;
-    
 }
 
 
