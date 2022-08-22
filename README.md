@@ -54,6 +54,8 @@ Render the wheel so that wheel actually spins and lands on the correct point val
 
 Running total of players' points and # of wins for continual game play
 
+Highlight or somehow emphasize players score when it's their turn.
+
 "Lose a turn" tile on wheel of fortune and logic to skip player's turn
 
 Create "Toss up" part of game where white tiles representing a word/phrase are shown and letters slowly are revealed. A player can hit their key to try to solve the puzzle. This determines who goes first. 

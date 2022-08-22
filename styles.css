@@ -1,3 +1,7 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 #top-screen {
     display: flex;
     justify-content: center;
@@ -24,18 +28,19 @@
     flex-direction: column;
     height: 65vh;
     width: 25vw;
-    background-color: blue;
+    /* background-color: blue; */
     justify-content: space-evenly;
     flex-wrap: nowrap;
-    /* align-items: center; */
+    align-items: center;
 }
 
 #wheel {
-    
+   width: 22vw; 
+
 }
 
 .aside-left {
-    font-size: 3vh;
+    font-size: 4vh;
     align-self: center;
 }
 
@@ -43,8 +48,10 @@
     text-align: center;
     max-width: 75%;
     min-width: 75%;
-    background-color: hotpink;
+    /* background-color: hotpink; */
     border-radius: 2px;
+    border: 1vw gray;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #spin-button {
@@ -63,6 +70,7 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
+    gap: 6vh;
     
     
 }
@@ -70,24 +78,28 @@
 #container-two {
     height: 65vh;
     width: 15vw;
-    background-color: yellow;
+    /* background-color: yellow; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     text-align: center;
+    align-items: center;
 }
 
 .aside-right {
     border-radius: 30px;
-    border: .7vh gray solid;
+    /* border: .7vh gray solid; */
+    width: 13vw;
 }
 
 #player-one-cash {
-    background-color: aqua;
+    /* background-color: aqua; */
     /* opacity: .5  */
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #player-two-cash {
-    background-color: orange;
+    /* background-color: orange; */
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 }
 
@@ -96,13 +108,16 @@
 }
 
 #message-board {
-    height: 12vh;
+    height: 11vh;
     /* width: 98vw; */
-    background-color: red;
-    border-radius: 20px;
-    margin: 1vh auto;
-    border: 1vh black solid;
-    box-shadow: 5px 10px;
+    /* background-color: red; */
+    border-radius: 25px;
+    margin: 1vh auto ;
+    /* border: .5vh black solid; */
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    font-size: 3vh;
+    padding: .1vh;
 }
 
 #bottom-screen {
@@ -111,22 +126,26 @@
     height: 5vh;
     flex-wrap: wrap;
     font-size: 2vh;
+    margin: 1vh;
 }
 
 #input {
     height: 100%;
-    width: 50vw;
+    width: 30vw;
     font-size: 2vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #guess-button {
     height: 100%;
     font-size: 2vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #solve-button {
     height: 100%;
     font-size: 2vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #tile-container {
@@ -145,13 +164,23 @@
     align-items: center;
     
     
+    
+}
+
+#word-container-one {
+    /* align-self: flex-start; */
+    
+}
+
+.instructions {
+    /* margin: 1vh 3vw 1vh 50vw; */
 }
 
 .square {
     position: relative;
     width: 8%;
     /* not sure i need this below */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .square:after {
@@ -181,4 +210,6 @@
     font-size: 2vw;
     
 }
+
+
 
