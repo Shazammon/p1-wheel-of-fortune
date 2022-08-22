@@ -24,11 +24,27 @@ let oneFreePlay = false
 let twoFreePlay = false
 const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'Bankrupt', 650, 'Free Play', 700, 'Lose a Turn', 800, 500, 450, 500, 300, 'Bankrupt']
 const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
+const puzzleOps = {
+    Food: 'BACON',
+    Clothing: 'JUMPSUITS ARE COOL',
+    Family: 'GRANDMA AND GRANDPA',
+}
+
+let currentPuzzleCategory = ""
+let currentPuzzle =""
 let currentPuzzleArray = []
 let firstWord = ""
 let secondWord = ""
 let thirdWord = ""
 let fourthWord = "" 
+
+function getRandomPuzzle(puzzleOps) {
+    let puzzleTest = Object.keys(puzzleOps);
+    currentPuzzleCategory = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
+    currentPuzzle = puzzleOps[currentPuzzleCategory]
+}
+// getRandomPuzzle(puzzleOps)
+
 
 
 
