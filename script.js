@@ -7,6 +7,11 @@ const guessButt = document.querySelector('#guess-button')
 const solveButt = document.querySelector('#solve-button')
 const newGameButt = document.querySelector('#new-game-button')
 const resetButt = document.querySelector('#reset-button')
+const firstWordOutput = document.getElementById('word-container-one')
+const secondWordOutput = document.getElementById('word-container-two')
+const thirdWordOutput = document.getElementById('word-container-three')
+const fourthWordOutput = document.getElementById('word-container-four')
+
 
 // console.log(spinVal, spinButt, guessButt, solveButt, newGameButt, resetButt)
 
@@ -18,7 +23,12 @@ let twoCash = 0
 let oneFreePlay = false
 let twoFreePlay = false
 const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'Bankrupt', 650, 'Free Play', 700, 'Lose a Turn', 800, 500, 450, 500, 300, 'Bankrupt']
-const puzzleOptions = ['BACON', 'JUMPSUIT']
+const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
+let currentPuzzleArray = []
+let firstWord = ""
+let secondWord = ""
+let thirdWord = ""
+let fourthWord = "" 
 
 
 
@@ -59,7 +69,7 @@ function randomSpinVal() {
 
 // Generate random value for puzzle
 function randomPuzzleVal() {
-    return Math.floor(Math.random() * 2)
+    return Math.floor(Math.random() * 4)
 }
 
 
@@ -111,15 +121,82 @@ spinButt.addEventListener('click', function(e) {
 function newPuzzle() {
     let puzzIndexNum = randomPuzzleVal()
     let currentPuzzle = puzzleOptions[puzzIndexNum]
-    return currentPuzzle
+    console.log(currentPuzzle)
+    currentPuzzleArray = currentPuzzle.split(" ")
+    console.log(currentPuzzleArray.length)
+    // Create word buckets
+    
+    firstWord = currentPuzzleArray[0]
+    console.log(firstWord)
+    if (currentPuzzleArray.length >= 2) {
+        secondWord = currentPuzzleArray[1]
+        console.log('there is more than one word')
+        console.log(`and that word is ${secondWord}`)
+        if (currentPuzzleArray.length >= 3) {
+            thirdWord = currentPuzzleArray[2]
+    if (currentPuzzleArray.length >= 4) {
+        fourthWord = currentPuzzleArray[3]
+    }}}
+    console.log(firstWord)
+    console.log(secondWord)
+    console.log(thirdWord)
 }
 
+newPuzzle()
+
 // function to create puzzle divs
-function generatePuzzleLetters(puzzle) {
-    for (i = 0; i < puzzle.length; i++) {
-        const newTile
+function generatePuzzleLetters(first, second, third, fourth) {
+    for (i = 0; i < first.length; i++) {
+        // Create Letter Div
+        const newSquareContainer = document.createElement('div')
+        newSquareContainer.classList.add('square')
+        newSquareContainer.setAttribute('id',`first-${i}`)
+        firstWordOutput.append(newSquareContainer)
+        // Create text div
+        const newTileContainer = document.createElement('div')
+        newTileContainer.classList.add('tile')
+        newTileContainer.innerText = first.charAt(i)
+        newSquareContainer.append(newTileContainer)
+    }
+    for (i = 0; i < second.length; i++) {
+        // Create Letter Div
+        const newSquareContainer = document.createElement('div')
+        newSquareContainer.classList.add('square')
+        newSquareContainer.setAttribute('id',`second-${i}`)
+        secondWordOutput.append(newSquareContainer)
+        // Create text div
+        const newTileContainer = document.createElement('div')
+        newTileContainer.classList.add('tile')
+        newTileContainer.innerText = second.charAt(i)
+        newSquareContainer.append(newTileContainer)
+    }
+    for (i = 0; i < third.length; i++) {
+        // Create Letter Div
+        const newSquareContainer = document.createElement('div')
+        newSquareContainer.classList.add('square')
+        newSquareContainer.setAttribute('id',`third-${i}`)
+        thirdWordOutput.append(newSquareContainer)
+        // Create text div
+        const newTileContainer = document.createElement('div')
+        newTileContainer.classList.add('tile')
+        newTileContainer.innerText = third.charAt(i)
+        newSquareContainer.append(newTileContainer)
+    }
+    for (i = 0; i < fourth.length; i++) {
+        // Create Letter Div
+        const newSquareContainer = document.createElement('div')
+        newSquareContainer.classList.add('square')
+        newSquareContainer.setAttribute('id',`fourth-${i}`)
+        fourthWordOutput.append(newSquareContainer)
+        // Create text div
+        const newTileContainer = document.createElement('div')
+        newTileContainer.classList.add('tile')
+        newTileContainer.innerText = fourth.charAt(i)
+        newSquareContainer.append(newTileContainer)
     }
 }
+
+generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
 
 
 
