@@ -54,6 +54,8 @@ Render the wheel so that wheel actually spins and lands on the correct point val
 
 Running total of players' points and # of wins for continual game play
 
+Make "classes" of players using constructor
+
 Highlight or somehow emphasize players score when it's their turn.
 
 "Lose a turn" tile on wheel of fortune and logic to skip player's turn
