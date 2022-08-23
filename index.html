@@ -40,21 +40,14 @@
         <!-- puzzle board -->
         <main>
             <!-- divs for each individual letter go here but created in the DOM-->
-            <div id="puzzle-board">
-                    <div id="word-container-one" class="word-container-class">
-
-                    </div>
-                    <div id="word-container-two" class="word-container-class">
-
-                    </div>
-                    <div id="word-container-three" class="word-container-class">
-
-                    </div>
-                    <div id="word-container-four" class="word-container-class">
-
-                    </div>
-
-              
+            <div id="main">
+                <div id="puzzle-board">
+                        <div id="word-container-one" class="word-container-class"></div>
+                        <div id="word-container-two" class="word-container-class"></div>
+                        <div id="word-container-three" class="word-container-class"></div>
+                        <div id="word-container-four" class="word-container-class"></div>
+                </div>
+                <div id="category-output"></div>
             </div>
         </main>
 
@@ -75,7 +68,7 @@
 
     <!-- Message board -->
     <div id="message-board">
-        <p>Player 1, it's your turn!</p>
+        <p id="message-board-text"></p>
     </div>
 
     <!-- input box, guess button, solve puzzle button, instructions -->

@@ -62,17 +62,27 @@ body {
 
 }
 
+#main {
+    display: flex;
+    flex-direction: column;
+    
+}
+
 #puzzle-board {
-    height: 65vh;
+    height: 56vh;
     width: 59vw;
-    background-color: purple;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     display: flex;
     flex-flow: column;
     justify-content: center;
     gap: 6vh;
-    
-    
+}
+
+#category-output {
+    height: 9vh;
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    text-align: center;
+    font-size: 3vw;
 }
 
 #container-two {
@@ -209,6 +219,14 @@ body {
     border: .1vh solid black;
     border-radius: 15%;
     font-size: 2vw;
+}
+
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 

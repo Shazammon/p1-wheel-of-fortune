@@ -1,8 +1,10 @@
 // Define DOM button objects
 const spinValOutput = document.querySelector('#spin-value')
 const spinButt = document.querySelector('#spin-button')
+const categoryOutput = document.querySelector('#category-output')
 const oneCashOutput = document.querySelector('#player-one-cash')
 const twoCashOutput = document.querySelector('#player-two-cash')
+const messageBoard = document.querySelector('#message-board-text')
 const guessButt = document.querySelector('#guess-button')
 const solveButt = document.querySelector('#solve-button')
 const newGameButt = document.querySelector('#new-game-button')
@@ -11,9 +13,6 @@ const firstWordOutput = document.getElementById('word-container-one')
 const secondWordOutput = document.getElementById('word-container-two')
 const thirdWordOutput = document.getElementById('word-container-three')
 const fourthWordOutput = document.getElementById('word-container-four')
-
-
-// console.log(spinVal, spinButt, guessButt, solveButt, newGameButt, resetButt)
 
 //Define global variables 
 let turn = 1
@@ -63,6 +62,7 @@ const puzzleOps = {
     },
     
 }
+
 
 let currentPuzzleObject = ""
 let currentPuzzleCategory = ""
@@ -118,6 +118,10 @@ function randomPuzzleVal() {
 
 
 // Message board functions
+// Game start
+function gameStartMessage() {
+    messageBoard.innerText = `Player 1, it's your turn! Go ahead and spin the wheel!`
+}
 // Bankrupt
 // Lose a turn
 // Free play
@@ -164,17 +168,14 @@ spinButt.addEventListener('click', function(e) {
 // Select random puzzle
 function getRandomPuzzle(puzzleOps) {
     let puzzleTest = Object.keys(puzzleOps);
-    currentPuzzleCategory = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
-    currentPuzzle = puzzleOps[currentPuzzleCategory]
+    currentPuzzleObject = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
+    currentPuzzle = puzzleOps[currentPuzzleObject].word
+    currentPuzzleCategory = puzzleOps[currentPuzzleObject].category
 }
-
 
 // Function to select a new Puzzle
 function generateNewPuzzle(puzzleOps) {
-    let puzzleTest = Object.keys(puzzleOps);
-    currentPuzzleObject = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
-    currentPuzzleCategory = puzzleOps[currentPuzzleObject[category]]
-    currentPuzzle = puzzleOps[currentPuzzleObject[word]]
+    getRandomPuzzle(puzzleOps)
     console.log(currentPuzzleCategory)
     console.log(currentPuzzle)
 
@@ -196,9 +197,6 @@ function generateNewPuzzle(puzzleOps) {
     if (currentPuzzleArray.length >= 4) {
         fourthWord = currentPuzzleArray[3]
     }}}
-    console.log(firstWord)
-    console.log(secondWord)
-    console.log(thirdWord)
 }
 
 generateNewPuzzle(puzzleOps)
@@ -214,6 +212,8 @@ function generatePuzzleLetters(first, second, third, fourth) {
         // Create text div
         const newTileContainer = document.createElement('div')
         newTileContainer.classList.add('tile')
+        newTileContainer.classList.add('disable-select')
+        newTileContainer.style.color = 'whitesmoke'
         newTileContainer.innerText = first.charAt(i)
         newSquareContainer.append(newTileContainer)
     }
@@ -226,7 +226,9 @@ function generatePuzzleLetters(first, second, third, fourth) {
         // Create text div
         const newTileContainer = document.createElement('div')
         newTileContainer.classList.add('tile')
-        newTileContainer.innerText = second.charAt(i)
+        newTileContainer.classList.add('disable-select')
+        newTileContainer.style.color = 'whitesmoke'
+        newTileContainer.innerText = first.charAt(i)
         newSquareContainer.append(newTileContainer)
     }
     for (i = 0; i < third.length; i++) {
@@ -238,7 +240,9 @@ function generatePuzzleLetters(first, second, third, fourth) {
         // Create text div
         const newTileContainer = document.createElement('div')
         newTileContainer.classList.add('tile')
-        newTileContainer.innerText = third.charAt(i)
+        newTileContainer.classList.add('disable-select')
+        newTileContainer.style.color = 'whitesmoke'
+        newTileContainer.innerText = first.charAt(i)
         newSquareContainer.append(newTileContainer)
     }
     for (i = 0; i < fourth.length; i++) {
@@ -250,12 +254,22 @@ function generatePuzzleLetters(first, second, third, fourth) {
         // Create text div
         const newTileContainer = document.createElement('div')
         newTileContainer.classList.add('tile')
-        newTileContainer.innerText = fourth.charAt(i)
+        newTileContainer.classList.add('disable-select')
+        newTileContainer.style.color = 'whitesmoke'
+        newTileContainer.innerText = first.charAt(i)
         newSquareContainer.append(newTileContainer)
     }
+    categoryOutput.innerText = `Category: ${currentPuzzleCategory}`
+    gameStartMessage()
+
 }
 
-generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
 
 
+
+
+newGameButt.addEventListener('click', (e) => {
+    generateNewPuzzle(puzzleOps);
+    generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
+})
 
