@@ -76,7 +76,7 @@
     <!-- input box, guess button, solve puzzle button, instructions -->
     <div id="bottom-screen">
         <!-- input box -->
-        <form id="guess-form">
+        <form id="guess-form" class="form">
             <div>
                 <input id="input">
 
@@ -86,9 +86,15 @@
         </form>
         <!-- Solve button -->
         <button id="solve-button">I'd like to solve the puzzle!</button>
+        <form id="solve-form" class="form">
+            <div>
+                <input class="hidden" id="solve-input">
+                <button id="submit-button" class="hidden">Solve it!</button>
+            </div>
+        </form>
         <div id="controls-container">
+            <button id="new-round-button" class="game-controls">Start New Round</button>
             <button id="instructions-button" class="game-controls">Instructions</button>
-            <button id="new-game-button" class="game-controls">Start New Game</button>
             <button id="reset-button" class="game-controls">Reset Scores</button>
         </div>
     </div>

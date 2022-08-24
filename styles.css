@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    
 }
 
 #top-screen {
@@ -140,21 +141,62 @@ body {
     margin: 1vh;
 }
 
+.form {
+    height: 100%;
+}
+
 #input {
     height: 100%;
-    width: 30vw;
-    font-size: 2vh;
+    width: 5vw;
+    font-size: 3vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #guess-button {
     height: 100%;
+    font-size: 3vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hidden-solve-input {
+    height: 100%;
+    width: 25vw;
+    font-size: 3vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#solve-input {
+    height: 100%;
+    height: 3vh;
+    width: 25vw;
     font-size: 2vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+#submit-button {
+    height: 100%;
+    height: 3vh;
+    font-size: 2vh;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.shown-solve-input {
+    height: 100%;
+    width: 25vw;
+    font-size: 3vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #solve-button {
     height: 100%;
+    height: 3vh;
     font-size: 2vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -230,6 +272,12 @@ body {
    -ms-user-select: none; /* Internet Explorer/Edge */
    color: whitesmoke;
 }
+
+.colored-tile {
+    color: black;
+}
+
+
 
 
 
