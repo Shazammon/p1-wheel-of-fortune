@@ -20,11 +20,15 @@
 // ]);
 
 // Define DOM button objects
+const oneTotalCashOutput = document.querySelector('#player-one-cum-cash')
+const twoTotalCashOutput = document.querySelector('#player-two-cum-cash')
 const spinValOutput = document.querySelector('#spin-value')
 const wheelOfFortune = document.querySelector('#wheel')
 const spinButt = document.querySelector('#spin-button')
 const puzzleBoard = document.querySelector('#puzzle-board')
 const categoryOutput = document.querySelector('#category-output')
+const oneRoundScore = document.querySelector('#player-one')
+const twoRoundScore = document.querySelector('#player-two')
 const oneCashOutput = document.querySelector('#player-one-cash')
 const twoCashOutput = document.querySelector('#player-two-cash')
 const oneFreePlayOutput = document.querySelector('#player-one-free-play')
@@ -39,14 +43,18 @@ const submitButt = document.querySelector('#submit-button')
 const solveForm = document.querySelector('#solve-form')
 const newRoundButt = document.querySelector('#new-round-button')
 const resetButt = document.querySelector('#reset-button')
+const instructionsButt = document.querySelector('#instructions-button')
 const firstWordOutput = document.getElementById('word-container-one')
 const secondWordOutput = document.getElementById('word-container-two')
 const thirdWordOutput = document.getElementById('word-container-three')
 const fourthWordOutput = document.getElementById('word-container-four')
+let modalInstructions = document.getElementById('myModal')
+let span = document.getElementsByClassName("close")[0];
 let allTiles ;
 let allSquares ;
 let interval ;
 let wheelDegrees = 0
+
 // const pause = setTimeout(stopWheelSpin, 1500)
 console.log(wheelOfFortune)
 
@@ -56,8 +64,8 @@ let nextTurn = 2
 let spinVal = 0
 // need to update this with Arrays!! it will be so much better
 let oneCash = 0
-let oneCumCash = 0
-let twoCumCash = 0
+let oneTotalCash = 0
+let twoTotalCash = 0
 let twoCash = 0
 let oneFreePlay = 0
 let twoFreePlay = 0
@@ -67,19 +75,19 @@ let freePlay = false
 let correctLetters = 0
 let wordArray = []
 let letterGuess = ''
-let timeToSpin = false;
-let timeToGuess = false;
-let usedLettersArray = []
-let timeToSolve = false;
-let gamesPlayed = 0;
-let timeForNewRound = true;
+let timeToSpin = false; // boolean to track whether it's time for player to spin
+let timeToGuess = false; // boolean to track whether it's time for player to guess
+let timeToSolve = false; // boolean to track whether it's time for player to solve the puzzle
+let timeForNewRound = true; // boolean to track whether it's time for a new round
+let usedLettersArray = [] // Array to keep track of guessed letters during a round
+let gamesPlayed = 0; // tracker for number of games played
 let newRoundClick = 0;
 
 const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'BANKRUPT', 650, 'FREE PLAY', 700, 'LOSE A TURN', 800, 500, 450, 500, 300, 'BANKRUPT']
 
 
 const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
-const puzzleOps = {
+let puzzleOps = {
     word1: {
         category: 'Thing',
         word: 'CREAM OF CHICKEN SOUP'
@@ -116,6 +124,90 @@ const puzzleOps = {
         category:'Person',
         word: 'CHILD PRODIGY',
     },
+    word10: {
+        category: 'Slang',
+        word: 'CHILL OUT',
+    },
+    word11: {
+        category: 'Phrase',
+        word: 'BRAINS AND BRAWN',
+    },
+    word12: {
+        category: 'Person',
+        word: 'VINCENT VAN GOGH',
+    },
+    word13: {
+        category: 'Foreign Phrase',
+        word: 'MAZEL TOV',
+    },
+    word14: {
+        category: 'Thing',
+        word: 'UNDERWATER PHOTOGRAPHY',
+    },
+    word1: {
+        category: 'Thing',
+        word: 'CHOCOLATE DIPPED STRAWBERRY',
+    },
+    word15: {
+        category: 'Place',
+        word: 'FACTORY',
+    },
+    word16: {
+        category: 'Place',
+        word: 'NEIGHBORHOOD',
+    },
+    word17: {
+        category: 'Phrase',
+        word: 'UNDERSTANDING THE BIG PICTURE',
+    },
+    word18: {
+        category: 'Person',
+        word: 'MARILYN MONROE',
+    },
+    word19: {
+        category: 'Occupation',
+        word: 'POLITICIAN',
+    },
+    word20: {
+        category: 'Phrase',
+        word: 'LET ME GUESS',
+    },
+    word21: {
+        category: 'Phrase',
+        word: 'ON CLOUD NINE',
+    },
+    word22: {
+        category: 'Thing',
+        word: 'BABY POWDER',
+    },
+    word23: {
+        category: 'Book',
+        word: 'GREEN EGGS AND HAM',
+    },
+    word24: {
+        category: 'Event',
+        word: 'SUMMER BREAK',
+    },
+    word25: {
+        category: 'Activity',
+        word: 'SYNCHRONIZED SWIMMING',
+    },
+    word26: {
+        category: 'Thing',
+        word: 'MARINE BIOLOGY',
+    },
+    word27: {
+        category: 'Occupation',
+        word: 'ATHLETIC DIRECTOR',
+    },
+    word28: {
+        category: 'Phrase',
+        word: 'BELIEVE IN YOURSELF',
+    },
+    word29: {
+        category: 'Title',
+        word: 'A WRINKLE IN TIME',
+    }
     
 }
 
@@ -142,43 +234,64 @@ oneCashOutput.innerText = '$' + oneCash
 twoCashOutput.innerText = '$' + twoCash
 
 
+// function to highlight whichever players' turn it currently is
+
+instructionsButt.onclick = function() {
+    modalInstructions.style.display = "block";
+}
+
+span.onclick = function() {
+    modalInstructions.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modalInstructions) {
+        modalInstructions.style.display = "none";
+    }
+}
+
 
 // Game functions 
 
-// Change player turn
+// Function to change player turn
 function changeTurn() {
+    // Change turn variable
     if (turn === 1) {
+        oneRoundScore.style.backgroundColor = 'white'
+        twoRoundScore.style.backgroundColor = 'rgb(74 240 73)'
         turn = 2
         nextTurn = 1
     } else if (turn === 2) {
+        oneRoundScore.style.backgroundColor = 'rgb(74 240 73)'
+        twoRoundScore.style.backgroundColor = 'white'
         turn = 1
         nextTurn = 2
     }
 }
 
-// Add cash to player score
+// Function: Add cash to player's current balance
 function addCash(cash) {
     if (turn === 1) {
-        oneCash += cash
-        oneCashOutput.innerText = '$' + oneCash
+        oneCash += cash // Update cash variable for player 1
+        oneCashOutput.innerText = '$' + oneCash // Update display for player 1
     } else if (turn === 2) {
-        twoCash += cash
-        twoCashOutput.innerText = '$' + twoCash
+        twoCash += cash // Update cash variable for player 2
+        twoCashOutput.innerText = '$' + twoCash // Update display for player 2
         
     }
 }
 
-// Free play text update
+// Function: Free play text update
 function freePlayTextUpdate(totalFreePlays) {
     if (turn === 1) {
-        oneFreePlayOutput.innerText = `Free Plays: ${totalFreePlays}`
+        oneFreePlayOutput.innerText = `Free Plays: ${totalFreePlays}` // update player 1 display
     } else if (turn === 2) {
-        twoFreePlayOutput.innerText = `Free Plays: ${totalFreePlays}`
+        twoFreePlayOutput.innerText = `Free Plays: ${totalFreePlays}` // Update player 2 display
     }
 }
 
 
-// Add Free plays to player score
+// Function: Add Free plays to player score
 function addFreePlay(numOfFreePlays) {
     for (let i = 0; i < numPlayers; i++) {
         if (i + 1 === turn) {
@@ -223,9 +336,17 @@ function holdYourGuessMessage(turn) {
     messageBoard.innerText = `Whoa there Player ${turn}, hold your horses! Before you can guess another letter, you need to first spin the Wheel of Fortune!`
 }
 
+function holdSpinNewGuessMessage() {
+    messageBoard.innerText = `Before you can guess a letter, you need to first start a new round!`
+}
+
 // Hold Your Spin message
 function holdYourSpinMessage(turn) {
     messageBoard.innerText = `Whoa there Player ${turn}, hold your horses! Before you can spin the wheel again, you need to first guess a letter!`
+}
+
+function holdSpinNewRoundMessage() {
+    messageBoard.innerText = `Before you can spin the wheel, you need to first start a new round!`
 }
 
 // Hold your solve message - guess version
@@ -290,7 +411,7 @@ function guessFailureMessage(turn, guess) {
 
 // Correctly solved puzzle message
 function correctPuzzleSolveMessage(turn) {
-    messageBoard.innerText = `CONGRATULATIONS PLAYER ${turn}! You correctly solved the puzzle! You are the winner of this round! Click "Start New Game" to play again.`
+    messageBoard.innerText = `CONGRATULATIONS PLAYER ${turn}! You correctly solved the puzzle! You are the winner of this round! Click "Start New Round" to play again.`
 }
 
 // Incorrectly solved puzzle message
@@ -306,6 +427,10 @@ function confirmNewGameOrSpinMessage(turn) {
 
 function confirmNewGameOrGuessMessage(turn) {
     messageBoard.innerText = `Are you sure you want to end this round and start a new one? If not, Player ${turn}, continue with your turn by guessing a letter.`
+}
+
+function newGameMessage() {
+    messageBoard.innerText = `The game has been reset. Press "Start New Round" to start a new game.`
 }
 
 
@@ -354,6 +479,7 @@ function stopWheelSpin() {
 // Spin Button Event listener
 spinButt.addEventListener('click', function(e) {
     timeToSolve = false;
+    newRoundButt.innerText = "Start New Round"
     if (timeToSpin === true) {
         let cashIndexNum = randomSpinVal()
         spinVal = wheelValues[cashIndexNum]
@@ -365,9 +491,13 @@ spinButt.addEventListener('click', function(e) {
         }
         spinAction(spinVal)
         wheelSpinInterval()
-        setTimeout(stopWheelSpin, 1000)
+        setTimeout(stopWheelSpin, 800)
     } else {
-        holdYourSpinMessage(turn)
+        if (timeForNewRound === true) {
+            holdSpinNewRoundMessage()
+        } else {
+            holdYourSpinMessage(turn)
+        }
     }
 })
                     
@@ -424,14 +554,20 @@ function spinAction(spinVal) {
 // Select random puzzle
 function getRandomPuzzle(puzzleOps) {
     let puzzleTest = Object.keys(puzzleOps);
+    console.log(puzzleTest)
     currentPuzzleObject = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
+    console.log(currentPuzzleObject)
     currentPuzzle = puzzleOps[currentPuzzleObject].word
     currentPuzzleCategory = puzzleOps[currentPuzzleObject].category
+    delete puzzleOps[currentPuzzleObject]
+    console.log(currentPuzzle)
+    console.log(puzzleOps)
 }
 
 // Function to select a new Puzzle
 function generateNewPuzzle(puzzleOps) {
     getRandomPuzzle(puzzleOps)
+    
     // console.log(currentPuzzleCategory)
     // console.log(currentPuzzle)
 
@@ -510,7 +646,7 @@ function generatePuzzleLetters(first, second, third, fourth) {
         newTileContainer.innerText = fourth.charAt(i)
         newSquareContainer.append(newTileContainer)
     }
-    allTiles = document.querySelectorAll('.disable-select')
+    allTiles = document.querySelectorAll('.tile')
     allSquares = document.querySelectorAll('.square')
     categoryOutput.innerText = `Category: ${currentPuzzleCategory}`
     convertToArray(currentPuzzleArray)
@@ -530,6 +666,21 @@ function newRound() {
     allSquares.forEach(square => {
         square.remove()
     })
+
+    
+    for (let i = 0; i < usedLettersArray.length; i++) {
+        usedLettersArray.splice(i)
+    }
+    categoryOutput.innerText = ''
+
+}
+
+function resetWordsAndArray() {
+    currentPuzzleArray.splice(0, currentPuzzleArray.length)
+    firstWord = ''
+    secondWord = ''
+    thirdWord = ''
+    fourthWord = ''
 }
 
 // New game button event listener
@@ -538,6 +689,9 @@ newRoundButt.addEventListener('click', (e) => {
         if (allTiles != undefined) {
             newRound()
         }
+        resetWordsAndArray()
+        console.log(currentPuzzleArray)
+        currentCashReset()
         newRoundButt.innerText = "Start New Round"
         generateNewPuzzle(puzzleOps);
         generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
@@ -553,7 +707,6 @@ newRoundButt.addEventListener('click', (e) => {
         newRoundButt.innerText = "Yes, Start New Round Please!"
         timeForNewRound = true;
     }
-
 })
 
 //PROBABLY WONT NEED THIS ANYMORE
@@ -661,6 +814,7 @@ function guessFunction(letterGuess) {
 //     guessFunction()
 // })
 
+// functions to check if letter has been used and to add guessed letter to usedLettersArray
 function usedLetterFunction(letter) {
     usedLettersArray.push(letter)
 }
@@ -670,10 +824,17 @@ function hasLetterBeenUsed(letter) {
         return true
     }
 }
+// functions to remove puzzle from possible options of puzzles for future rounds
 
+function usedPuzzleFunction(currentPuzzle) {
+    // puzzleOps.
+}
 
+// Event listener for guessing a letter (Guess Button)
 guessForm.addEventListener('submit', function(e) {
     e.preventDefault()
+    timeToSolve = false
+    newRoundButt.innerText = "Start New Round"
     let letterGuess = input.value.toUpperCase()
     console.log(letterGuess)
     
@@ -692,7 +853,11 @@ guessForm.addEventListener('submit', function(e) {
         } 
         
     } else {
-        holdYourGuessMessage(turn)
+        if (timeForNewRound === true) {
+            holdSpinNewGuessMessage()
+        } else {
+            holdYourGuessMessage(turn)
+        }
     }
      
 },)
@@ -740,10 +905,29 @@ function puzzleIsSolved() {
     console.dir(puzzleBoard.children[0].children[1])
 }
 
-// function winnerScoreIncreased() {
-//     if (turn === 1)
+function winnerScoreIncreased() {
+    if (turn === 1) {
+        oneTotalCash = oneTotalCash + (oneCash * 2)
+        oneTotalCashOutput.innerText = `$${oneTotalCash}`
+    } else if (turn === 2) {
+        twoTotalCash = twoTotalCash + (twoCash * 2)
+        twoTotalCashOutput.innerText = `$${twoTotalCash}`
+    }
+}
 
-// }
+function currentCashReset() {
+    oneCash = 0
+    twoCash = 0
+    oneCashOutput.innerText = `$${oneCash}`
+    twoCashOutput.innerText = `$${twoCash}`
+}
+
+function totalCashReset() {
+    oneTotalCash = 0
+    twoTotalCash = 0
+    oneTotalCashOutput.innerText = `$${oneCash}`
+    twoTotalCashOutput.innerText = `$${twoCash}`
+}
 
 solveForm.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -753,9 +937,13 @@ solveForm.addEventListener('submit', function(e) {
     console.log()
     if (puzzleGuess === currentPuzzle) {
         puzzleIsSolved()
+        console.dir(allTiles)
         correctPuzzleSolveMessage(turn);
         winnerScoreIncreased()
+        currentCashReset()
         timeForNewRound = true;
+        timeToSpin = false;
+        console.log(timeToGuess, timeToSpin)
     } else {
         wrongPuzzleSolveMessage(turn, puzzleGuess)
         changeTurn()
@@ -764,18 +952,28 @@ solveForm.addEventListener('submit', function(e) {
     timeToSolve = false;
 })
 
-// TO DO LIST?/////////
 
-//format buttons
-// write up insgructions!
-// Move instructions to top!
-// puzzle can only be played once and goes to used puzzle array
+// Reset Game function
+function resetScores() {
+    currentCashReset();
+    totalCashReset();
+    newRound();
+    newGameMessage();
+    turn = 1;
+    timeForNewRound = true;
+}
+
+resetButt.addEventListener('click', function(e) {
+    resetScores();   
+})
+
+
+// TO DO LIST?/////////
 // add more words to word bank
-//End of game scoring!
+//continue formatting buttons
 // Write up the README
 // put comments into code explaining what I did
 //buttons blink demonstrating what their next move should be
-// highlight the player turn
 // FORMATTING!
 // add music!
 
