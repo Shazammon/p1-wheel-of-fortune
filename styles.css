@@ -6,7 +6,7 @@ body {
 #top-screen {
     display: flex;
     justify-content: space-between;
-    height: 10vh;
+    height: 11vh;
 
 }
 
@@ -17,16 +17,17 @@ body {
 
 #scores-title {
     font-size: 2vw;
-    padding: 2vh;
+    padding: 1.5vh;
     /* margin: auto 1vw; */
 }
 
 .top-scores {
     text-align: center;
-    border-radius: 30px;
+    /* border-radius: 30px; */
     /* border: .7vh gray solid; */
     width: 13vw;
-    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    border: .2vh solid black;
 }
 
 #logo {
@@ -37,7 +38,7 @@ body {
 
 #center-screen {
     display: flex;
-    height: 65vh;
+    height: 64vh;
     /* flex-wrap: wrap; */
     align-items: center;
     margin: 0 auto;
@@ -47,7 +48,7 @@ body {
 #container-one {
     display: flex;
     flex-direction: column;
-    height: 65vh;
+    height: 64vh;
     width: 25vw;
     /* background-color: blue; */
     justify-content: space-evenly;
@@ -90,7 +91,7 @@ body {
 }
 
 #puzzle-board {
-    height: 56vh;
+    height: 55vh;
     width: 59vw;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     display: flex;
@@ -107,7 +108,7 @@ body {
 }
 
 #container-two {
-    height: 65vh;
+    height: 64vh;
     width: 15vw;
     /* background-color: yellow; */
     display: flex;

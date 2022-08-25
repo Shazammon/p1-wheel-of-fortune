@@ -766,12 +766,14 @@ solveForm.addEventListener('submit', function(e) {
 
 // TO DO LIST?/////////
 
+//format buttons
 // write up insgructions!
 // Move instructions to top!
 // puzzle can only be played once and goes to used puzzle array
 // add more words to word bank
 //End of game scoring!
-// Create new cumulative scores
+// Write up the README
+// put comments into code explaining what I did
 //buttons blink demonstrating what their next move should be
 // highlight the player turn
 // FORMATTING!
