@@ -1,23 +1,3 @@
-// Stack overflow said to add thi in
-// const nameMap = new Map([
-//     [21, ['Monterey','12']],
-//     [20, ['Big Sur', '11']],
-//     [19, ['Catalina', '10.15']],
-//     [18, ['Mojave', '10.14']],
-//     [17, ['High Sierra', '10.13']],
-//     [16, ['Sierra', '10.12']],
-//     [15, ['El Capitan', '10.11']],
-//     [14, ['Yosemite', '10.10']],
-//     [13, ['Mavericks', '10.9']],
-//     [12, ['Mountain Lion', '10.8']],
-//     [11, ['Lion', '10.7']],
-//     [10, ['Snow Leopard', '10.6']],
-//     [9, ['Leopard', '10.5']],
-//     [8, ['Tiger', '10.4']],
-//     [7, ['Panther', '10.3']],
-//     [6, ['Jaguar', '10.2']],
-//     [5, ['Puma', '10.1']]
-// ]);
 
 // Define DOM button objects
 const oneTotalCashOutput = document.querySelector('#player-one-cum-cash')
@@ -50,13 +30,9 @@ const thirdWordOutput = document.getElementById('word-container-three')
 const fourthWordOutput = document.getElementById('word-container-four')
 let modalInstructions = document.getElementById('myModal')
 let span = document.getElementsByClassName("close")[0];
-let allTiles ;
-let allSquares ;
-let interval ;
-let wheelDegrees = 0
 
-// const pause = setTimeout(stopWheelSpin, 1500)
-console.log(wheelOfFortune)
+// Define placeholder variables
+
 
 //Define global variables 
 let turn = 1
@@ -73,8 +49,8 @@ let numPlayers = 2
 let freePlayCount = [0, 0]
 let freePlay = false
 let correctLetters = 0
-let wordArray = []
-let letterGuess = ''
+
+let wheelDegrees = 0
 let timeToSpin = false; // boolean to track whether it's time for player to spin
 let timeToGuess = false; // boolean to track whether it's time for player to guess
 let timeToSolve = false; // boolean to track whether it's time for player to solve the puzzle
@@ -83,10 +59,30 @@ let usedLettersArray = [] // Array to keep track of guessed letters during a rou
 let gamesPlayed = 0; // tracker for number of games played
 let newRoundClick = 0;
 
+//placeholder variables
+let wordArray = []
+let letterGuess = ''
+let allTiles ;
+let allSquares ;
+let interval ;
+let currentPuzzleObject = ""
+let currentPuzzleCategory = ""
+let currentPuzzle =""
+let currentPuzzleArray = []
+let firstWord = ""
+let secondWord = ""
+let thirdWord = ""
+let fourthWord = ""
+let firstWordArray = []
+let secondWordArray = []
+let thirdWordArray = []
+let fourthWordArray = []
+
+// Array of all possible wheel options
 const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'BANKRUPT', 650, 'FREE PLAY', 700, 'LOSE A TURN', 800, 500, 450, 500, 300, 'BANKRUPT']
 
 
-const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
+// List of puzzle options in an object
 let puzzleOps = {
     word1: {
         category: 'Thing',
@@ -212,30 +208,13 @@ let puzzleOps = {
 }
 
 
-let currentPuzzleObject = ""
-let currentPuzzleCategory = ""
-let currentPuzzle =""
-let currentPuzzleArray = []
-let firstWord = ""
-let secondWord = ""
-let thirdWord = ""
-let fourthWord = ""
-let firstWordArray = []
-let secondWordArray = []
-let thirdWordArray = []
-let fourthWordArray = []
-
-
-
-
 // Innertext
 spinValOutput.innerText = '--'
 oneCashOutput.innerText = '$' + oneCash
 twoCashOutput.innerText = '$' + twoCash
 
 
-// function to highlight whichever players' turn it currently is
-
+// functions to generate the instructions modal 
 instructionsButt.onclick = function() {
     modalInstructions.style.display = "block";
 }
@@ -250,8 +229,7 @@ window.onclick = function(event) {
     }
 }
 
-
-// Game functions 
+// GAME FUNCTIONS
 
 // Function to change player turn
 function changeTurn() {
@@ -302,21 +280,19 @@ function addFreePlay(numOfFreePlays) {
     }
 }
 
-
-
-// Generate random value for spin
+// Function: Generate random value for spin
 function randomSpinVal() {
     return Math.floor(Math.random() * wheelValues.length)
 }
 
-// Generate random value for puzzle
+// Function: Generate random value for puzzle
 function randomPuzzleVal() {
     return Math.floor(Math.random() * 4)
 }
 
 
 // MESSAGE BOARD FUNCTIONS
-// Game start
+// Game start message
 function gameStartMessage() {
     messageBoard.innerText = `Player 1, it's your turn! Go ahead and spin the Wheel of Fortune!`
 }
@@ -340,11 +316,12 @@ function holdSpinNewGuessMessage() {
     messageBoard.innerText = `Before you can guess a letter, you need to first start a new round!`
 }
 
-// Hold Your Spin message
+// Hold Your Spin messages
+// Spin first version
 function holdYourSpinMessage(turn) {
     messageBoard.innerText = `Whoa there Player ${turn}, hold your horses! Before you can spin the wheel again, you need to first guess a letter!`
 }
-
+// New round first on spin version
 function holdSpinNewRoundMessage() {
     messageBoard.innerText = `Before you can spin the wheel, you need to first start a new round!`
 }
@@ -359,12 +336,12 @@ function holdSolveMustSpinMessage(turn) {
     messageBoard.innerText = `Not so fast Player ${turn}! You can only solve the puzzle after guessing a correct letter. First proceed with spinning the Wheel of Fortune!`
 }
 
-
 // Invalid guess message
 function invalidGuessMessage(turn) {
-    messageBoard.innerText = `Player ${turn}, your guess is invalid. Make sure that your guess is capitalized and only consists of one letter, and try again.`
+    messageBoard.innerText = `Player ${turn}, your guess is invalid. Make sure that your guess only consists of one letter, and try again.`
 }
 
+// Already used a letter invalid message
 function usedLetterMessage(turn, guess) {
     messageBoard.innerText = `Player ${turn}, ${guess} has already been guessed. Please guess a different letter.`
 }
@@ -377,12 +354,12 @@ function bankruptMessage(turn) {
 function bankruptAvoidMessage(turn) {
     messageBoard.innerText = `Player ${turn}, you landed on Bankrupt but luckily you have a "Free play." Your cash balance is safe and you can take another spin!` 
 }
-// Lose a turn
+// Lose a turn message
 function loseATurnMessage(turn) {
     messageBoard.innerText = `Player ${turn}, you lose a turn - bummer! Player ${nextTurn}, it's your turn to spin!`
 }
 
-// Avoid losing a turn
+// Avoid losing a turn message
 function loseATurnAvoidMessage(turn) {
     messageBoard.innerText = `Player ${turn}, you landed on "lose a turn" but you had a "Free play." Take another spin!`
 }
@@ -396,6 +373,7 @@ function guessSuccessMessage(guess, numOfLetters) {
     }
 }
 
+// Successfully guessed letter(s) on a free play spin message
 function guessSuccessMessageFreePlay(guess, numOfLetters) {
     if (numOfLetters === 1) {
         messageBoard.innerText = `Congratulations Player ${turn}, the puzzle contains ${correctLetters} ${guess}! You have been awarded ${numOfLetters} ${spinVal} that can be used if you ever land on "Lose A Turn" or "Bankrupt!" Spin again, Player ${turn}!`
@@ -404,7 +382,7 @@ function guessSuccessMessageFreePlay(guess, numOfLetters) {
     }
 }
 
-// Failure to guess a correct letter
+// Failure to guess a correct letter message
 function guessFailureMessage(turn, guess) {
     messageBoard.innerText = `Player ${turn}, unfortunately there are no ${guess}'s in the puzzle. Better luck next turn! Player ${nextTurn}, it's your turn to take a spin!`
 }
@@ -419,22 +397,24 @@ function wrongPuzzleSolveMessage(turn, guess) {
     messageBoard.innerText = `I'm sorrry player ${turn}, but "${guess}" is incorrect! Maybe you'll get it next turn! Player ${nextTurn}, your turn to spin the wheel.`
 }
 
-
 // Are you SURE you want to start a new game message
+// spin version
 function confirmNewGameOrSpinMessage(turn) {
     messageBoard.innerText = `Are you sure you want to end this round and start a new one? If not, Player ${turn}, continue with your turn by spinning the wheel.`
 }
 
+// guess version
 function confirmNewGameOrGuessMessage(turn) {
     messageBoard.innerText = `Are you sure you want to end this round and start a new one? If not, Player ${turn}, continue with your turn by guessing a letter.`
 }
 
+// New game message
 function newGameMessage() {
     messageBoard.innerText = `The game has been reset. Press "Start New Round" to start a new game.`
 }
 
 
-// Bankrupt function
+// Function: landed on BANKRUPT
 function bankruptFunction(turn) {
     switch (turn) {
         case 1:
@@ -448,35 +428,22 @@ function bankruptFunction(turn) {
             }
         }
         
-        // function loseATurnFunction(turn) {
-            //     switch (turn) {
-                //         case 1: 
-                //             if (oneFreePlay > 0) {
-                    //                 loseATurnMessage(turn)
-                    //                 oneFreePlay
-                    //             }
-                    //     }
-                    
-                    // }
-
+//FUNCTIONS TO SPIN WHEEL
+// Function: set interval
 function wheelSpinInterval() {
     interval = setInterval(wheelSpins, 5)
 }
-    
+// Function: degrees to spin
 function wheelSpins() {
     wheelDegrees = wheelDegrees + 10
     wheelOfFortune.style.transform = 'rotate(' +  wheelDegrees + 'deg)'
 }
-
-
-
+//Function: clear interval
 function stopWheelSpin() {
     clearInterval(interval)
 }
 
-// setInterval(wheelSpins(),100)
-
-// Spin Button Event listener
+// Event Listener Function: Spin Button 
 spinButt.addEventListener('click', function(e) {
     timeToSolve = false;
     newRoundButt.innerText = "Start New Round"
@@ -500,7 +467,8 @@ spinButt.addEventListener('click', function(e) {
         }
     }
 })
-                    
+
+// Function: what to do with various spin results
 function spinAction(spinVal) {
     // console.log('turn: ', turn)
     for (let i = 0; i <= numPlayers; i++) {
@@ -547,43 +515,25 @@ function spinAction(spinVal) {
             }
         }
     }
-    console.log('turn: ', turn)
 }
 
-
-// Select random puzzle
+// Function: Select random puzzle
 function getRandomPuzzle(puzzleOps) {
     let puzzleTest = Object.keys(puzzleOps);
-    console.log(puzzleTest)
     currentPuzzleObject = puzzleTest[Math.floor(Math.random() * puzzleTest.length)]
-    console.log(currentPuzzleObject)
     currentPuzzle = puzzleOps[currentPuzzleObject].word
     currentPuzzleCategory = puzzleOps[currentPuzzleObject].category
     delete puzzleOps[currentPuzzleObject]
-    console.log(currentPuzzle)
-    console.log(puzzleOps)
 }
 
-// Function to select a new Puzzle
+// Function: Select a new Puzzle
 function generateNewPuzzle(puzzleOps) {
     getRandomPuzzle(puzzleOps)
-    
-    // console.log(currentPuzzleCategory)
-    // console.log(currentPuzzle)
-
-   
-    // let puzzIndexNum = randomPuzzleVal()
-    // let currentPuzzle = puzzleOptions[puzzIndexNum]
     currentPuzzleArray = currentPuzzle.split(" ")
     console.log(currentPuzzleArray.length)
-    // Create word buckets
-    
     firstWord = currentPuzzleArray[0]
-    console.log(firstWord)
     if (currentPuzzleArray.length >= 2) {
         secondWord = currentPuzzleArray[1]
-        console.log('there is more than one word')
-        console.log(`and that word is ${secondWord}`)
         if (currentPuzzleArray.length >= 3) {
             thirdWord = currentPuzzleArray[2]
     if (currentPuzzleArray.length >= 4) {
@@ -592,7 +542,7 @@ function generateNewPuzzle(puzzleOps) {
     console.log(firstWord, secondWord, thirdWord, fourthWord)
 }
 
-// function to create puzzle divs
+// Function: Create letter tiles and divs to hold the tiles
 function generatePuzzleLetters(first, second, third, fourth) {
     for (let i = 0; i < first.length; i++) {
         // Create Letter Div
@@ -658,7 +608,7 @@ function generatePuzzleLetters(first, second, third, fourth) {
 
 }
 
-
+// Function: start a new round
 function newRound() {
     allTiles.forEach(tile => {
         tile.remove()
@@ -675,6 +625,7 @@ function newRound() {
 
 }
 
+//Function: reset word variables and puzzle array
 function resetWordsAndArray() {
     currentPuzzleArray.splice(0, currentPuzzleArray.length)
     firstWord = ''
@@ -683,7 +634,7 @@ function resetWordsAndArray() {
     fourthWord = ''
 }
 
-// New game button event listener
+// Event Listener: New game button event listener
 newRoundButt.addEventListener('click', (e) => {
     if (timeForNewRound === true) {
         if (allTiles != undefined) {
@@ -709,8 +660,8 @@ newRoundButt.addEventListener('click', (e) => {
     }
 })
 
-//PROBABLY WONT NEED THIS ANYMORE
-// function to convert individual word characters to their own array
+
+// Function: Convert individual word characters to their own array
 function convertToArray(currentPuzzleArray) {
         firstWordArray = Array.from(currentPuzzleArray[0])
         if (currentPuzzleArray.length >= 2) {
@@ -722,11 +673,7 @@ function convertToArray(currentPuzzleArray) {
         }}}
 }
 
-
-
-
-
-// Guess function
+// Function: Logic for guessing a letter in the puzzle
 function guessFunction(letterGuess) {
      
     for (let i = 0; i <= numPlayers; i++) {
@@ -743,10 +690,6 @@ function guessFunction(letterGuess) {
                         correctLetters = correctLetters + 1
                         console.log(correctLetters)
                         for (let l = 0; l < puzzleBoard.children[j].children[k].children.length; l++) {
-                            // for (m = 0; m < wordArray.length; m++) {
-                            //     console.log(wordArray[m])
-                            //     // console.log(puzzleBoard.children[j].children[k].children[l].classList)
-                            // }
                             puzzleBoard.children[j].children[k].children[l].classList.remove('disable-select')
                             console.dir(puzzleBoard.children[j].children[k].children[l])
                     
@@ -754,7 +697,6 @@ function guessFunction(letterGuess) {
                     }
                 } 
             }
-            // console.log(correctLetters)
             if (correctLetters > 0) {
                 if (freePlay === false) {
                     spinVal = spinVal * correctLetters
@@ -788,49 +730,22 @@ function guessFunction(letterGuess) {
         } 
 
     }
-    // const wordOneLetterOne = document.querySelector('#first-0')
-    // console.log(wordOneLetterOne)
-    // for (i = 0; i <= numPlayers; i++) {
-    //     if (i + 1 === turn) {
-    //         let letterGuess = input.value
-    //         console.log(input.value)
-    //         let correctLetters = 0
-    //         for (i = 0; i < firstWordArray.length; i++) {
-    //             if (firstWordArray[i] === letterGuess) {
-    //                 correctLetters =+ 1
-    //                 wordOneLetterOne.classList.remove('disable-select')
-    //                 console.log('YESSS')
-    //                 console.log(wordOneLetterOne.className)
-    //             }
-    //         }
-    //     }
-    // }
-    
-    console.log('turn: ', turn)
 }
 
 
-// guessButt.addEventListener('mousedown', e => {
-//     guessFunction()
-// })
-
-// functions to check if letter has been used and to add guessed letter to usedLettersArray
+// Function: check if letter has been used and to add guessed letter to usedLettersArray
+// Add to array
 function usedLetterFunction(letter) {
     usedLettersArray.push(letter)
 }
-
+// Check if its been used
 function hasLetterBeenUsed(letter) {
     if (usedLettersArray.includes(letter)) {
         return true
     }
 }
-// functions to remove puzzle from possible options of puzzles for future rounds
 
-function usedPuzzleFunction(currentPuzzle) {
-    // puzzleOps.
-}
-
-// Event listener for guessing a letter (Guess Button)
+// Event listener: on submit form to guess a letter (Guess Button)
 guessForm.addEventListener('submit', function(e) {
     e.preventDefault()
     timeToSolve = false
@@ -851,22 +766,16 @@ guessForm.addEventListener('submit', function(e) {
             usedLetterFunction(letterGuess)
             guessFunction(letterGuess)
         } 
-        
     } else {
         if (timeForNewRound === true) {
             holdSpinNewGuessMessage()
         } else {
             holdYourGuessMessage(turn)
         }
-    }
-     
+    } 
 },)
 
-console.log('turn: ', turn)
-// changeTurn()
-// console.log('turn: ', turn)
-
-
+// Function: set up solve the puzzle form - button + input
 function puzzleSolveSetup() {
     solveButt.classList.add('hidden')
     solveInput.classList.remove('hidden')
@@ -874,12 +783,9 @@ function puzzleSolveSetup() {
     solveInput.focus()
 }
 
-
+// Event Listener: solve button event listener
 solveButt.addEventListener('click', function(e) {
     e.preventDefault()
-    console.log('Solve:', timeToSolve)
-    console.log('Guess:', timeToGuess)
-    console.log('Spin:', timeToSpin)
     if (timeToSolve === true) {
         puzzleSolveSetup()         
     } else if (timeToGuess === true) {
@@ -889,6 +795,7 @@ solveButt.addEventListener('click', function(e) {
     }
 })
 
+// Function: bring back the "I'd like to solve the puzzle button"
 function resetSolveButton() {
     solveInput.value = ''
     solveButt.classList.remove('hidden')
@@ -896,15 +803,14 @@ function resetSolveButton() {
     submitButt.classList.add('hidden')
 }
 
+// Function: reveal all tiles on a correct puzzle solve
 function puzzleIsSolved() {
-    console.dir(puzzleBoard.children[0].children[1])
     allTiles.forEach(tile => {
         tile.classList.add('colored-tile')
-        console.dir(puzzleBoard.children[0].children[1])
     })
-    console.dir(puzzleBoard.children[0].children[1])
 }
 
+// Function: increase winner's cumulative balance after correct puzzle solve
 function winnerScoreIncreased() {
     if (turn === 1) {
         oneTotalCash = oneTotalCash + (oneCash * 2)
@@ -915,6 +821,7 @@ function winnerScoreIncreased() {
     }
 }
 
+// Function: reset players' current cash balances 
 function currentCashReset() {
     oneCash = 0
     twoCash = 0
@@ -922,6 +829,7 @@ function currentCashReset() {
     twoCashOutput.innerText = `$${twoCash}`
 }
 
+// Function: reset players' cumulative total cash balances
 function totalCashReset() {
     oneTotalCash = 0
     twoTotalCash = 0
@@ -929,6 +837,7 @@ function totalCashReset() {
     twoTotalCashOutput.innerText = `$${twoCash}`
 }
 
+// Event Listner: on solve the puzzle form
 solveForm.addEventListener('submit', function(e) {
     e.preventDefault()
     console.log(currentPuzzle)
@@ -953,7 +862,7 @@ solveForm.addEventListener('submit', function(e) {
 })
 
 
-// Reset Game function
+// Function: Reset enter game function
 function resetScores() {
     currentCashReset();
     totalCashReset();
@@ -963,6 +872,7 @@ function resetScores() {
     timeForNewRound = true;
 }
 
+// Event Listener: on "Reset Scores" button to start entire new game
 resetButt.addEventListener('click', function(e) {
     resetScores();   
 })
