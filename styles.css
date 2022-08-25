@@ -5,8 +5,28 @@ body {
 
 #top-screen {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 10vh;
+
+}
+
+#cum-scores {
+    display: flex;
+    justify-content: center;
+}
+
+#scores-title {
+    font-size: 2vw;
+    padding: 2vh;
+    /* margin: auto 1vw; */
+}
+
+.top-scores {
+    text-align: center;
+    border-radius: 30px;
+    /* border: .7vh gray solid; */
+    width: 13vw;
+    box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #logo {
@@ -80,10 +100,10 @@ body {
 }
 
 #category-output {
-    height: 9vh;
+    height: 7vh;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     text-align: center;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 #container-two {
@@ -115,8 +135,13 @@ body {
     
 }
 
+h2 {
+    margin: 1vh auto;
+}
+
 .player-cash {
     font-size: 3vw;
+    margin: 1vh auto;
 }
 
 #message-board {

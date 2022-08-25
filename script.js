@@ -21,6 +21,7 @@
 
 // Define DOM button objects
 const spinValOutput = document.querySelector('#spin-value')
+const wheelOfFortune = document.querySelector('#wheel')
 const spinButt = document.querySelector('#spin-button')
 const puzzleBoard = document.querySelector('#puzzle-board')
 const categoryOutput = document.querySelector('#category-output')
@@ -44,12 +45,19 @@ const thirdWordOutput = document.getElementById('word-container-three')
 const fourthWordOutput = document.getElementById('word-container-four')
 let allTiles ;
 let allSquares ;
+let interval ;
+let wheelDegrees = 0
+// const pause = setTimeout(stopWheelSpin, 1500)
+console.log(wheelOfFortune)
 
 //Define global variables 
 let turn = 1
 let nextTurn = 2
 let spinVal = 0
+// need to update this with Arrays!! it will be so much better
 let oneCash = 0
+let oneCumCash = 0
+let twoCumCash = 0
 let twoCash = 0
 let oneFreePlay = 0
 let twoFreePlay = 0
@@ -65,10 +73,10 @@ let usedLettersArray = []
 let timeToSolve = false;
 let gamesPlayed = 0;
 let timeForNewRound = true;
+let newRoundClick = 0;
 
-// const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'BANKRUPT', 650, 'FREE PLAY', 700, 'LOSE A TURN', 800, 500, 450, 500, 300, 'BANKRUPT']
+const wheelValues = [5000, 500, 900, 700, 300, 800, 550, 400, 500, 600, 350, 500, 900, 'BANKRUPT', 650, 'FREE PLAY', 700, 'LOSE A TURN', 800, 500, 450, 500, 300, 'BANKRUPT']
 
-const wheelValues = ['FREE PLAY', 'BANKRUPT', 'LOSE A TURN']
 
 const puzzleOptions = ['BACON', 'JUMPSUITS ARE COOL', 'I LOVE TO CODE', 'SOFTWARE DEVELOPMENT']
 const puzzleOps = {
@@ -181,6 +189,8 @@ function addFreePlay(numOfFreePlays) {
     }
 }
 
+
+
 // Generate random value for spin
 function randomSpinVal() {
     return Math.floor(Math.random() * wheelValues.length)
@@ -267,9 +277,9 @@ function guessSuccessMessage(guess, numOfLetters) {
 
 function guessSuccessMessageFreePlay(guess, numOfLetters) {
     if (numOfLetters === 1) {
-        messageBoard.innerText = `Congratulations Player ${turn}, the puzzle contains ${correctLetters} ${guess}! You have been awarded ${numOfLetters} ${spinVal} that can be used if you ever land on "Lose A Turn" or "Bankrupt!"` 
+        messageBoard.innerText = `Congratulations Player ${turn}, the puzzle contains ${correctLetters} ${guess}! You have been awarded ${numOfLetters} ${spinVal} that can be used if you ever land on "Lose A Turn" or "Bankrupt!" Spin again, Player ${turn}!`
     } else {
-        messageBoard.innerText = `Congratulations Player ${turn}, the puzzle contains ${correctLetters} ${guess}'s! You have been awarded ${numOfLetters} ${spinVal}'s that can be used if you ever land on "Lose A Turn" or "Bankrupt!"`
+        messageBoard.innerText = `Congratulations Player ${turn}, the puzzle contains ${correctLetters} ${guess}'s! You have been awarded ${numOfLetters} ${spinVal}'s that can be used if you ever land on "Lose A Turn" or "Bankrupt!" Spin again, Player ${turn}!`
     }
 }
 
@@ -324,6 +334,23 @@ function bankruptFunction(turn) {
                     
                     // }
 
+function wheelSpinInterval() {
+    interval = setInterval(wheelSpins, 5)
+}
+    
+function wheelSpins() {
+    wheelDegrees = wheelDegrees + 10
+    wheelOfFortune.style.transform = 'rotate(' +  wheelDegrees + 'deg)'
+}
+
+
+
+function stopWheelSpin() {
+    clearInterval(interval)
+}
+
+// setInterval(wheelSpins(),100)
+
 // Spin Button Event listener
 spinButt.addEventListener('click', function(e) {
     timeToSolve = false;
@@ -337,6 +364,8 @@ spinButt.addEventListener('click', function(e) {
             spinValOutput.innerText = wheelValues[cashIndexNum]
         }
         spinAction(spinVal)
+        wheelSpinInterval()
+        setTimeout(stopWheelSpin, 1000)
     } else {
         holdYourSpinMessage(turn)
     }
@@ -350,6 +379,8 @@ function spinAction(spinVal) {
                 if (freePlayCount[i] > 0) {
                     loseATurnAvoidMessage(turn)
                     freePlayCount[i] = freePlayCount[i] - 1
+                    freePlayTextUpdate(freePlayCount[i])
+                    console.log(freePlayCount[i])
                     return
                 } else {
                     loseATurnMessage(turn)
@@ -360,6 +391,8 @@ function spinAction(spinVal) {
                 if (freePlayCount[i] > 0) {
                     bankruptAvoidMessage(turn)
                     freePlayCount[i] = freePlayCount[i] - 1
+                    freePlayTextUpdate(freePlayCount[i])
+                    console.log(freePlayCount[i])
                     return
                 } else {
                     bankruptMessage(turn)
@@ -505,6 +538,7 @@ newRoundButt.addEventListener('click', (e) => {
         if (allTiles != undefined) {
             newRound()
         }
+        newRoundButt.innerText = "Start New Round"
         generateNewPuzzle(puzzleOps);
         generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
         timeToSpin = true;
@@ -513,10 +547,11 @@ newRoundButt.addEventListener('click', (e) => {
     } else if (timeToSpin === true) {
         confirmNewGameOrSpinMessage(turn)
         newRoundButt.innerText = "Yes, Start New Round Please!"
+        timeForNewRound = true;
     } else if (timeToGuess === true) {
         confirmNewGameOrGuessMessage(turn)
         newRoundButt.innerText = "Yes, Start New Round Please!"
-
+        timeForNewRound = true;
     }
 
 })
@@ -705,6 +740,11 @@ function puzzleIsSolved() {
     console.dir(puzzleBoard.children[0].children[1])
 }
 
+// function winnerScoreIncreased() {
+//     if (turn === 1)
+
+// }
+
 solveForm.addEventListener('submit', function(e) {
     e.preventDefault()
     console.log(currentPuzzle)
@@ -714,6 +754,7 @@ solveForm.addEventListener('submit', function(e) {
     if (puzzleGuess === currentPuzzle) {
         puzzleIsSolved()
         correctPuzzleSolveMessage(turn);
+        winnerScoreIncreased()
         timeForNewRound = true;
     } else {
         wrongPuzzleSolveMessage(turn, puzzleGuess)
@@ -724,18 +765,18 @@ solveForm.addEventListener('submit', function(e) {
 })
 
 // TO DO LIST?/////////
-// free plays are all effed up
-// make sure free plays actually avoid bankruptcy/lose a turn
-//erase old tiles and generate new ones when you create a new game
 
-//End of game scoring!
-//buttons blink demonstrating what their next move should be
-// puzzle can only be played once and goes to used puzzle array
-
-// highlight the player turn
-
-// CHECKS TO MAKE SURE THAT PLAYER ENTERS CAPITAL LETTERS
-
+// write up insgructions!
 // Move instructions to top!
+// puzzle can only be played once and goes to used puzzle array
+// add more words to word bank
+//End of game scoring!
+// Create new cumulative scores
+//buttons blink demonstrating what their next move should be
+// highlight the player turn
+// FORMATTING!
+// add music!
 
-// 
+
+
+
