@@ -274,7 +274,6 @@ function addFreePlay(numOfFreePlays) {
         if (i + 1 === turn) {
             freePlayCount[i] = freePlayCount[i] + numOfFreePlays
             freePlayTextUpdate(freePlayCount[i])
-            console.log(freePlayCount[i])
         }
     }
 }
@@ -485,7 +484,6 @@ spinButt.addEventListener('click', function(e) {
 // Function: what to do with various spin results
 function spinAction(spinVal) {
     newGameValidator = false;
-    console.log('validator after spin:', newGameValidator)
     for (let i = 0; i <= numPlayers; i++) { // for loop for each player 
         if (i + 1 === turn) { // if statement so that below code only runs for current player
             if (spinVal === 'LOSE A TURN') { // if spin was lose a turn
@@ -493,7 +491,6 @@ function spinAction(spinVal) {
                     loseATurnAvoidMessage(turn)
                     freePlayCount[i] = freePlayCount[i] - 1
                     freePlayTextUpdate(freePlayCount[i])
-                    console.log(freePlayCount[i])
                     return
                 } else {
                     loseATurnMessage(turn)
@@ -505,7 +502,6 @@ function spinAction(spinVal) {
                     bankruptAvoidMessage(turn)
                     freePlayCount[i] = freePlayCount[i] - 1
                     freePlayTextUpdate(freePlayCount[i])
-                    console.log(freePlayCount[i])
                     return
                 } else {
                     bankruptMessage(turn)
@@ -545,7 +541,6 @@ function getRandomPuzzle(puzzleOps) {
 function generateNewPuzzle(puzzleOps) {
     getRandomPuzzle(puzzleOps)
     currentPuzzleArray = currentPuzzle.split(" ")
-    console.log(currentPuzzleArray.length)
     firstWord = currentPuzzleArray[0]
     if (currentPuzzleArray.length >= 2) {
         secondWord = currentPuzzleArray[1]
@@ -554,7 +549,6 @@ function generateNewPuzzle(puzzleOps) {
     if (currentPuzzleArray.length >= 4) {
         fourthWord = currentPuzzleArray[3]
     }}}
-    console.log(firstWord, secondWord, thirdWord, fourthWord)
 }
 
 // Function: Create letter tiles and divs to hold the tiles
@@ -634,7 +628,6 @@ function newRound() {
     }
     categoryOutput.innerText = ''
     newGameValidator = false;
-    console.log('validator after new game:', newGameValidator)
 
 }
 
@@ -654,7 +647,6 @@ newRoundButt.addEventListener('click', (e) => {
             newRound()
         }
         resetWordsAndArray()
-        console.log(currentPuzzleArray)
         currentCashReset()
         newRoundButt.innerText = "Start New Round"
         resetButt.innerText = "Reset Scores"
@@ -690,21 +682,15 @@ function convertToArray(currentPuzzleArray) {
 function guessFunction(letterGuess) {
      
     for (let i = 0; i <= numPlayers; i++) {
-        console.log (i + 1)
         if (i + 1 === turn) {
-            console.log('this should only run once')
             for (let j = 0; j < currentPuzzleArray.length; j++) {
                 currentPuzzleArray[j]
                 wordArray = Array.from(currentPuzzleArray[j])
-                console.log(wordArray)
                 for (let k = 0; k < puzzleBoard.children[j].children.length; k++) {
-                    console.log(puzzleBoard.children[j].children.length)
                     if (wordArray[k] === letterGuess) {
                         correctLetters = correctLetters + 1
-                        console.log(correctLetters)
                         for (let l = 0; l < puzzleBoard.children[j].children[k].children.length; l++) {
                             puzzleBoard.children[j].children[k].children[l].classList.remove('disable-select')
-                            console.dir(puzzleBoard.children[j].children[k].children[l])
                     
                         }
                     }
@@ -731,13 +717,11 @@ function guessFunction(letterGuess) {
                     freePlay = false;
                 }
             } else {
-                console.log('turn before message:', turn)
                 guessFailureMessage(turn, letterGuess)
                 input.value = ''
                 changeTurn()
                 timeToSpin = true;
                 timeToGuess = false;
-                console.log('turn after message and function:', turn)
                 return
             }
         } 
@@ -765,14 +749,9 @@ guessForm.addEventListener('submit', function(e) {
     resetButt.innerText = "Reset Scores"
     newRoundButt.innerText = "Start New Round"
     let letterGuess = input.value.toUpperCase()
-    console.log(letterGuess)
     newGameValidator = false;
     
     if (timeToGuess === true) {
-        console.log(letterGuess === '')
-        console.log(letterGuess.toLowerCase() === letterGuess) 
-        console.log(letterGuess.length > 1)
-        console.log(usedLettersArray)
         if (letterGuess === '' || letterGuess.length > 1) {
             invalidGuessMessage(turn)
         } else if (hasLetterBeenUsed(letterGuess) === true) {
@@ -801,7 +780,6 @@ function puzzleSolveSetup() {
 // Event Listener: solve button event listener
 solveButt.addEventListener('click', function(e) {
     e.preventDefault()
-    console.log('validator after solve:', newGameValidator)
     if (timeToSolve === true) {
         puzzleSolveSetup()         
     } else if (timeToGuess === true) {
@@ -856,21 +834,15 @@ function totalCashReset() {
 // Event Listner: on solve the puzzle form
 solveForm.addEventListener('submit', function(e) {
     e.preventDefault()
-    console.log(currentPuzzle)
     let puzzleGuess = solveInput.value.toUpperCase();
-    console.log(puzzleGuess)
-    console.log()
-    console.log('validator after submit solve form:', newGameValidator)
     newGameValidator = false;
     if (puzzleGuess === currentPuzzle) {
         puzzleIsSolved()
-        console.dir(allTiles)
         correctPuzzleSolveMessage(turn);
         winnerScoreIncreased()
         currentCashReset()
         timeForNewRound = true;
         timeToSpin = false;
-        console.log(timeToGuess, timeToSpin)
     } else {
         wrongPuzzleSolveMessage(turn, puzzleGuess)
         changeTurn()
@@ -897,7 +869,6 @@ resetButt.addEventListener('click', function(e) {
         resetScores();   
         resetButt.innerText = "Reset Scores"
         newGameValidator = false;
-        console.log('validator', newGameValidator)
     } else if (timeForNewRound === true) {
         confirmNewGameNotRound()
         resetButt.innerText = "Yes, Reset Scores/Start New Game!"
