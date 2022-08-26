@@ -129,7 +129,7 @@ body {
     height: 5vh;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     text-align: center;
-    font-size: 1.5vw;
+    font-size: 2vw;
     color: white;
 }
 
@@ -186,7 +186,7 @@ h2 {
     /* border: .5vh black solid; */
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
-    font-size: 3vh;
+    font-size: 2.5vh;
     padding: .1vh;
 }
 
@@ -195,7 +195,7 @@ h2 {
     justify-content: space-evenly;
     height: 5vh;
     flex-wrap: wrap;
-    font-size: 3vh;
+    font-size: 2.5vh;
     margin: 1vh;
 }
 
@@ -206,20 +206,20 @@ h2 {
 #input {
     height: 100%;
     width: 5vw;
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #guess-button {
     height: 100%;
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .hidden-solve-input {
     height: 100%;
     width: 25vw;
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: none;
 }
@@ -230,9 +230,9 @@ h2 {
 
 #solve-input {
     height: 100%;
-    height: 3vh;
+    height: 2.5vh;
     width: 25vw;
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -240,21 +240,21 @@ h2 {
 #submit-button {
     height: 100%;
     /* height: 3vh; */
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .shown-solve-input {
     height: 100%;
     width: 25vw;
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #solve-button {
-    height: 100%;
+    height: 3.5vh;
     /* height: 3vh; */
-    font-size: 3vh;
+    font-size: 2.5vh;
     box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -281,7 +281,7 @@ h2 {
 }
 
 .game-controls {
-    font-size: 3vh;
+    font-size: 2.5vh;
 }
 
 
