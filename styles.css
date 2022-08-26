@@ -32,7 +32,7 @@ body {
 }
 
 #logo {
-    
+    padding: 0 0 0 3vw;
 }
 
 /* consider making max-min widths heights for all sections and then putting them ALL in a flexbox */
@@ -122,14 +122,15 @@ body {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    gap: 6vh;
+    gap: 4vh;
 }
 
 #category-output {
-    height: 7vh;
+    height: 5vh;
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
     text-align: center;
-    font-size: 2vw;
+    font-size: 1.5vw;
+    color: white;
 }
 
 #container-two {
