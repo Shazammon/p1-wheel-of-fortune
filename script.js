@@ -31,8 +31,6 @@ const fourthWordOutput = document.getElementById('word-container-four')
 let modalInstructions = document.getElementById('myModal')
 let span = document.getElementsByClassName("close")[0];
 
-// Define placeholder variables
-
 
 //Define global variables 
 let turn = 1
@@ -55,6 +53,7 @@ let timeToSpin = false; // boolean to track whether it's time for player to spin
 let timeToGuess = false; // boolean to track whether it's time for player to guess
 let timeToSolve = false; // boolean to track whether it's time for player to solve the puzzle
 let timeForNewRound = true; // boolean to track whether it's time for a new round
+let newGameValidator = false; //boolean to track if players actually want to reset scores and start a new game
 let usedLettersArray = [] // Array to keep track of guessed letters during a round
 let gamesPlayed = 0; // tracker for number of games played
 let newRoundClick = 0;
@@ -397,7 +396,7 @@ function wrongPuzzleSolveMessage(turn, guess) {
     messageBoard.innerText = `I'm sorrry player ${turn}, but "${guess}" is incorrect! Maybe you'll get it next turn! Player ${nextTurn}, your turn to spin the wheel.`
 }
 
-// Are you SURE you want to start a new game message
+// Are you SURE you want to start a new round message
 // spin version
 function confirmNewGameOrSpinMessage(turn) {
     messageBoard.innerText = `Are you sure you want to end this round and start a new one? If not, Player ${turn}, continue with your turn by spinning the wheel.`
@@ -411,6 +410,19 @@ function confirmNewGameOrGuessMessage(turn) {
 // New game message
 function newGameMessage() {
     messageBoard.innerText = `The game has been reset. Press "Start New Round" to start a new game.`
+}
+
+// Are you SURE you want to start a new game message
+function confirmNewGameNotRound() {
+    messageBoard.innerText = `Whoa there, I think you meant to start a new round! Resetting scores will erase cumulative scores and start a completely new game. To start a new round, select "Start a New Round"`
+}
+// confirm a new game message - spin version
+function confirmNewGameSpin() {
+    messageBoard.innerText = `Are you sure you want to reset scores and start a completely new game? If not, Player ${turn}, continue the game by spinning the wheel.`
+}
+// confirm a new game message - guess version
+function confirmNewGameGuess() {
+    messageBoard.innerText = `Are you sure you want to reset scores and start a completely new game? If not, Player ${turn}, continue the game by guessing a letter.`
 }
 
 
@@ -447,6 +459,8 @@ function stopWheelSpin() {
 spinButt.addEventListener('click', function(e) {
     timeToSolve = false;
     newRoundButt.innerText = "Start New Round"
+    resetButt.innerText = "Reset Scores"
+
     if (timeToSpin === true) {
         let cashIndexNum = randomSpinVal()
         spinVal = wheelValues[cashIndexNum]
@@ -470,11 +484,12 @@ spinButt.addEventListener('click', function(e) {
 
 // Function: what to do with various spin results
 function spinAction(spinVal) {
-    // console.log('turn: ', turn)
-    for (let i = 0; i <= numPlayers; i++) {
-        if (i + 1 === turn) {
-            if (spinVal === 'LOSE A TURN') {
-                if (freePlayCount[i] > 0) {
+    newGameValidator = false;
+    console.log('validator after spin:', newGameValidator)
+    for (let i = 0; i <= numPlayers; i++) { // for loop for each player 
+        if (i + 1 === turn) { // if statement so that below code only runs for current player
+            if (spinVal === 'LOSE A TURN') { // if spin was lose a turn
+                if (freePlayCount[i] > 0) { // did player have 
                     loseATurnAvoidMessage(turn)
                     freePlayCount[i] = freePlayCount[i] - 1
                     freePlayTextUpdate(freePlayCount[i])
@@ -601,10 +616,6 @@ function generatePuzzleLetters(first, second, third, fourth) {
     categoryOutput.innerText = `Category: ${currentPuzzleCategory}`
     convertToArray(currentPuzzleArray)
     gameStartMessage()
-    console.log('turn:', turn)
-    console.dir(puzzleBoard.children[0].children[0].children[0])
-    console.dir(puzzleBoard.children[0].children[0])
-    
 
 }
 
@@ -622,6 +633,8 @@ function newRound() {
         usedLettersArray.splice(i)
     }
     categoryOutput.innerText = ''
+    newGameValidator = false;
+    console.log('validator after new game:', newGameValidator)
 
 }
 
@@ -644,6 +657,7 @@ newRoundButt.addEventListener('click', (e) => {
         console.log(currentPuzzleArray)
         currentCashReset()
         newRoundButt.innerText = "Start New Round"
+        resetButt.innerText = "Reset Scores"
         generateNewPuzzle(puzzleOps);
         generatePuzzleLetters(firstWord, secondWord, thirdWord, fourthWord)
         timeToSpin = true;
@@ -659,7 +673,6 @@ newRoundButt.addEventListener('click', (e) => {
         timeForNewRound = true;
     }
 })
-
 
 // Function: Convert individual word characters to their own array
 function convertToArray(currentPuzzleArray) {
@@ -749,9 +762,11 @@ function hasLetterBeenUsed(letter) {
 guessForm.addEventListener('submit', function(e) {
     e.preventDefault()
     timeToSolve = false
+    resetButt.innerText = "Reset Scores"
     newRoundButt.innerText = "Start New Round"
     let letterGuess = input.value.toUpperCase()
     console.log(letterGuess)
+    newGameValidator = false;
     
     if (timeToGuess === true) {
         console.log(letterGuess === '')
@@ -786,6 +801,7 @@ function puzzleSolveSetup() {
 // Event Listener: solve button event listener
 solveButt.addEventListener('click', function(e) {
     e.preventDefault()
+    console.log('validator after solve:', newGameValidator)
     if (timeToSolve === true) {
         puzzleSolveSetup()         
     } else if (timeToGuess === true) {
@@ -844,6 +860,8 @@ solveForm.addEventListener('submit', function(e) {
     let puzzleGuess = solveInput.value.toUpperCase();
     console.log(puzzleGuess)
     console.log()
+    console.log('validator after submit solve form:', newGameValidator)
+    newGameValidator = false;
     if (puzzleGuess === currentPuzzle) {
         puzzleIsSolved()
         console.dir(allTiles)
@@ -870,11 +888,31 @@ function resetScores() {
     newGameMessage();
     turn = 1;
     timeForNewRound = true;
+    timeToGuess = false;
 }
 
 // Event Listener: on "Reset Scores" button to start entire new game
 resetButt.addEventListener('click', function(e) {
-    resetScores();   
+    if (newGameValidator === true) {
+        resetScores();   
+        resetButt.innerText = "Reset Scores"
+        newGameValidator = false;
+        console.log('validator', newGameValidator)
+    } else if (timeForNewRound === true) {
+        confirmNewGameNotRound()
+        resetButt.innerText = "Yes, Reset Scores/Start New Game!"
+        newGameValidator = true;
+    } else {
+        if (timeToSpin === true) {
+            resetButt.innerText = "Yes, Reset Scores/Start New Game!"
+            confirmNewGameSpin();
+            newGameValidator = true;
+        } else if (timeToGuess === true) {
+            resetButt.innerText = "Yes, Reset Scores/Start New Game!"
+            confirmNewGameGuess();
+            newGameValidator = true;
+        }
+    }
 })
 
 

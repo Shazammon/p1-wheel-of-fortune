@@ -16,7 +16,7 @@ body {
 }
 
 #scores-title {
-    font-size: 2vw;
+    font-size: 3vh;
     padding: 1.5vh;
     /* margin: auto 1vw; */
 }
@@ -28,6 +28,7 @@ body {
     width: 13vw;
     /* box-shadow: 0 1vh 2vh 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     border: .2vh solid black;
+    /* font-size: 1.5vh; */
 }
 
 #logo {
@@ -171,7 +172,7 @@ h2 {
 }
 
 .player-cash {
-    font-size: 3vw;
+    font-size: 3.5vh;
     margin: 1vh auto;
 }
 
