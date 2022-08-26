@@ -14,7 +14,7 @@ https://shazammon.github.io/p1-wheel-of-fortune/
 For this project, I relied on HTML5, CSS for styling, and Javascript for functionality. The game is operated through DOM manipulation. 
 
 
-## Project Approach 
+## Project Approach / Roadblocks / Takeaways
 
 For this project, I first thought through the layout of the webpage and the cadence of gameplay. After structuring my thoughts,I set up an outline in HTML of what the webpage would look like, with all the relative div containers set up to enable Flexbox layouts. I then drew from my current knowledge bank of javascript funcionatliy and documented the types of variables and functions that would be required to facilitate game play. 
 After documenting a preliminary HTML and JavaScript outline, I wrote up my HTML and began playing with the layout using the Flexbox model. I had to watch several tutorials on Udemy from Colt Steele's "The Web Developer Bootcamp 2022" class. After I felt confident in Flexbox mechanisms, I refined my div containers and set up the layout of the webpage. I added additional styling to give the page a simple, yet sleek design. 
@@ -25,7 +25,14 @@ I ran into several challenges along the way. The first was to call back DOM obje
 
 There were many elements of the game that I did not anticipate in my initial planning that proved to require great effort to successfully code into the game. For example, having a "Free Play" option on the wheel (which, if a player is awarded a "Free Play", they can use to counteract landing on "Bankrupt" or "Lose a Turn." I created an Array to store how many free plays a player has and drew upon that array to check if a player had a free play to use before "Bankrupt" or "Lose a Turn" was ever used.)
 
-I also relied on For loops that ran for the number of players so that the game could dynamically be played by 2 or more players. 
+I was proud that I wrote the code so that it could dynamically adapt to more than 2 players. For this I relied on For loops that only ran code if the "Turn" variable matched the whichever player's turn it currently was.  
+
+I learned the power of using "console.logs" to prevent, identify, and address bugs in my code. The more frequently that I pre-emptively deployed console.log's to validate what I was coding, the less frequently bugs popped up. When bugs did happen, I was able to get more comfortable placing console.logs in strategic places to identify bugs and I became more efficient, identifying the bugs sooner!
+
+I also learned how important it is to master a concept before I try to jump employing it in my code. There are default properties and certain behaviors that each variable, object, element, function, and syntax has that if you master it, you can prevent bugs and write code in a more efficient way. 
+
+I also learned the importance of planning. There were many contingencies in my game that I did not account for during my planning phase that caused roadblocks down the road. Had I truly mentally thought through a full game, every type of action and result of those actions, and then made a preliminary plan as to how I would write code to employ tose actions/results, I could have written more effiient code and prevented roadblocks. 
+
 
 
 
@@ -90,6 +97,9 @@ Unlimited number of words and phrases pulled in somehow
 Successfully creating layout of screen in a way that looks nice and is functional
 
 Auto-creating objects representing each letter tile and then auto-spacing out the letter tiles of the word puzzle - do I use flexbox for this?
+
+## Sources
+
 
 
 
