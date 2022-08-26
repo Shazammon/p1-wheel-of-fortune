@@ -1,7 +1,7 @@
 # WHEEL OF FORTUNE!
 
 
-## Application Description 
+## Game Description 
 
 Wheel of fortune is a beloved global TV show and I've created a dynamic web version of the show! Two players can compete for by solving word/phrase puzzles with only a "category" as a hint. Players are presented with white squares, with the number of squares corresponding to the number of letters in the word puzzle. Each player will get to guess one letter at a time. If the letter is in the puzzle, then they can guess again. Each turn, a player spins the Wheel of Fortune, which has point values on a wheel. If they correctly guess a letter, they will receive whatever point value their spin lands on. If, on their turn, they want to solve the puzzle, they can press a button to type in the answer. 
 
@@ -11,7 +11,10 @@ https://shazammon.github.io/p1-wheel-of-fortune/
 
 ## Tech Stack
 
-For this project, I relied on HTML5, CSS for styling, and Javascript for functionality. The game is operated through DOM manipulation. 
+- HTML5
+- CSS
+- JavaScript
+- DOM manipulation
 
 
 ## Project Approach / Roadblocks / Takeaways
@@ -45,33 +48,23 @@ I also learned the importance of planning. There were many contingencies in my g
 
 
 ## MVP
-Render a start screen with instructions on how to play
+- Render a start screen with game play instructions
 
-Render a game screen with:
-- Wheel of Fortune banner
-- A colorful wheel with point values attached to each slice of the wheel
-- Message board
-- Output screen showing point values
-- Running total values for each player
-- Buttons to start game, spin, enter the letter guess, solve the puzzle, reset game
-- Input box to guess a letter or the puzzle
-- Puzzle board screen with white tiles representing letters of the word
+- Render a game screen with wheel, puzzle, letter tiles, message board, buttons, input boxes, and cash balances
 
-Render the winning screen and prize
+- Randomly generate puzzle and puzzle can only be played once
 
-Create array of possible word/phrase options with corresponding categories that are randomly selected at the start of a new game. Once a word is used, it goes to the back of the queue and is not selected again until all words/phrases have been used.
+- Randomly generate a value after spin
 
-Render a dollar value on the screen after a player presses the "Spin" button - the value is chosen from an array of possible dollar values
+- Render messages guiding players through gameplay
 
-Create logic to display prompts on message board at the correct time, e.g. "Player 1, it's your turn. Spin the wheel!", "Player 1, guess
+- Create logic to check if a letter is in the given word/phrase, appropriate points added to to respective player if letter is in word
 
-Create logic to check if a letter is in the given word/phrase, appropriate points added to to respective player if letter is in word
+- Create logic to continue with same player if correct letter is guessed, and switch to next player if letter is not in word
 
-Create logic to continue with same player if correct letter is guessed, and switch to next player if letter is not in word
+- When player selects "Solve the Puzzle" button, checks if phrase is correct and if yes, projects the winning message
 
-When player selects "Solve the Puzzle" button, checks if phrase is correct and if yes, projects the winning message
-
-The "start new game" button resets the game and randomly generates a new word puzzle
+- The "start new game" button resets the game and randomly generates a new word puzzle
 
 
 
@@ -99,6 +92,10 @@ Successfully creating layout of screen in a way that looks nice and is functiona
 Auto-creating objects representing each letter tile and then auto-spacing out the letter tiles of the word puzzle - do I use flexbox for this?
 
 ## Sources
+Instructions modal: https://www.w3schools.com/howto/howto_css_modals.asp
+Rainbow background: https://stackoverflow.com/questions/64859808/how-to-create-a-full-rainbow-background
+Wheel of Fortune Logo image: https://www.valottery.com/wheeloffortune
+Wheel of Fortune wheel image: https://i.ebayimg.com/images/g/t-cAAOSw-yNfwtrQ/s-l500.jpg
 
 
 
